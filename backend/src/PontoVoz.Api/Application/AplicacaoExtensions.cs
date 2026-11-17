@@ -1,0 +1,28 @@
+using PontoVoz.Api.Application.Interfaces;
+using PontoVoz.Api.Application.Services;
+
+namespace PontoVoz.Api.Application;
+
+public static class AplicacaoExtensions
+{
+    /// <summary>
+    /// Registra os services de consulta e os administrativos. São <c>scoped</c>, como os repositórios e o
+    /// <c>DbContext</c> que eles usam; o <see cref="TimeProvider"/> já é registrado no <c>Program.cs</c>.
+    /// </summary>
+    public static IServiceCollection AddAplicacaoPontoVoz(this IServiceCollection services)
+    {
+        services.AddScoped<IParadaService, ParadaService>();
+        services.AddScoped<ILinhaService, LinhaService>();
+        services.AddScoped<IDestinoService, DestinoService>();
+        services.AddScoped<IUltimasPassagensService, UltimasPassagensService>();
+        services.AddScoped<IPrevisoesService, PrevisoesService>();
+        services.AddScoped<IAlternativasService, AlternativasService>();
+        services.AddScoped<IResumoParadaService, ResumoParadaService>();
+
+        // Operações administrativas.
+        services.AddScoped<IAdministracaoParadasService, AdministracaoParadasService>();
+        services.AddScoped<IAdministracaoLinhasService, AdministracaoLinhasService>();
+        services.AddScoped<IObservacoesPassagemService, ObservacoesPassagemService>();
+        return services;
+    }
+}

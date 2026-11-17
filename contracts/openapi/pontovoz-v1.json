@@ -1,0 +1,2595 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "PontoVoz API",
+    "description": "API do totem PontoVoz (CitizenTech FIAP). São 13 operações de negócio e o GET /health: consultas públicas, operações administrativas do operador, previsões de chegada (provedor simulado por padrão) e alternativas de deslocamento e resumo da parada. Todos os dados de demonstração são simulados e marcados com dadosSimulados. O adaptador da API Olho Vivo (SPTrans) vem desligado e não foi validado contra a API real.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5080/"
+    }
+  ],
+  "paths": {
+    "/api/v1/destinos": {
+      "get": {
+        "tags": [
+          "Destinos"
+        ],
+        "summary": "Destinos ativos pelo nome, sem diferenciar maiúsculas e acentos, ordenados pelo nome.",
+        "operationId": "BuscarDestinos",
+        "parameters": [
+          {
+            "name": "termo",
+            "in": "query",
+            "description": "Trecho do nome do destino, de 2 a 60 caracteres (por exemplo, \"norte\").",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "Página, a partir de 1. Padrão: 1.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "description": "Itens por página, de 1 a 50. Padrão: 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginaDtoOfDestinoDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaudeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaudeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaudeResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "headers": {
+              "Retry-After": {
+                "description": "Segundos até uma nova tentativa (sempre 30).",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaudeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaudeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaudeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/linhas": {
+      "get": {
+        "tags": [
+          "Linhas"
+        ],
+        "summary": "Linhas ativas, por código, letreiro ou terminais, ordenadas pelo código.",
+        "operationId": "BuscarLinhas",
+        "parameters": [
+          {
+            "name": "termo",
+            "in": "query",
+            "description": "Trecho do código, do letreiro ou de um terminal, de 2 a 60 caracteres.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "Página, a partir de 1. Padrão: 1.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "description": "Itens por página, de 1 a 50. Padrão: 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginaDtoOfLinhaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paradas": {
+      "get": {
+        "tags": [
+          "Paradas"
+        ],
+        "summary": "Busca paradas ativas por nome ou código, ou identifica a parada do totem pelo `codigoExterno`.",
+        "operationId": "BuscarParadas",
+        "parameters": [
+          {
+            "name": "termo",
+            "in": "query",
+            "description": "Trecho do nome ou do código, de 2 a 60 caracteres, sem diferenciar maiúsculas e acentos.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigoExterno",
+            "in": "query",
+            "description": "Código da parada, exato e sem diferenciar maiúsculas (por exemplo, SIM-P001).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "description": "Página, a partir de 1. Padrão: 1.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "description": "Itens por página, de 1 a 50. Padrão: 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginaDtoOfParadaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paradas/{id}": {
+      "get": {
+        "tags": [
+          "Paradas"
+        ],
+        "summary": "Detalhe de uma parada ativa, com as linhas ativas que a atendem.",
+        "operationId": "ObterParada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParadaDetalheDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paradas/{id}/ultimas-passagens": {
+      "get": {
+        "tags": [
+          "Paradas"
+        ],
+        "summary": "Última passagem registrada de cada linha da parada, com nível de confirmação e desatualização.",
+        "operationId": "ObterUltimasPassagens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "linhaId",
+            "in": "query",
+            "description": "Opcional: limita a uma linha que atende a parada.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UltimasPassagensParadaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paradas/{id}/previsoes": {
+      "get": {
+        "tags": [
+          "Paradas"
+        ],
+        "summary": "Próximas chegadas previstas nas linhas da parada.",
+        "description": "Uma previsão é uma estimativa do provedor (nivelConfirmacao = Previsao), não uma passagem\r\nobservada: ela nunca aparece em ultimas-passagens. Por padrão o provedor é simulado (origem\r\nSimulado), com horários fictícios calculados no instante da consulta; nenhuma previsão é\r\noficial da SPTrans. Previsões vencidas não são devolvidas. Com o provedor indisponível, a\r\nresposta é 503 ProvedorPrevisoesIndisponivel com Retry-After: 30.",
+        "operationId": "ObterPrevisoes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "linhaId",
+            "in": "query",
+            "description": "Opcional: limita a uma linha que atende a parada.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrevisoesParadaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "headers": {
+              "Retry-After": {
+                "description": "Segundos até uma nova tentativa (sempre 30).",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paradas/{id}/alternativas": {
+      "get": {
+        "tags": [
+          "Paradas"
+        ],
+        "summary": "Compara as linhas diretas da parada até um destino, pelo menor tempo total estimado.",
+        "description": "Só linhas diretas com percurso cadastrado, sem baldeação. Tempo total = espera da próxima\r\nchegada + percurso estimado (simulado). Comparáveis primeiro, por tempo total, espera e código,\r\ncom posição 1, 2, 3...; depois as linhas sem previsão, sem posição. situacao: Comparadas,\r\nSemComparacao (nenhuma linha com previsão, inclusive com o provedor indisponível, ainda 200) ou\r\nSemLinhaDireta (lista vazia, provedor não consultado). comparacaoCompleta só é true quando todas\r\nas linhas foram comparadas. Nenhum resultado é uma rota oficial da SPTrans.",
+        "operationId": "ObterAlternativas",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "destinoId",
+            "in": "query",
+            "description": "Obrigatório: id do destino (inteiro ≥ 1), obtido em GET /api/v1/destinos.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternativasDeslocamentoDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paradas/{id}/resumo": {
+      "get": {
+        "tags": [
+          "Paradas"
+        ],
+        "summary": "Resumo para o totem: parada, previsões e últimas passagens numa só resposta.",
+        "description": "As três partes têm o mesmo formato das rotas individuais e o mesmo instante (consultadoEm).\r\nCom o provedor de previsões indisponível, a resposta continua 200: situacao Parcial,\r\npartesIndisponiveis [\"previsoes\"], aviso ResumoParcial e previsoes.status ProvedorIndisponivel.",
+        "operationId": "ObterResumo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResumoParadaDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/linhas": {
+      "post": {
+        "tags": [
+          "Administração"
+        ],
+        "summary": "Cadastra uma linha em um sentido. Ela nasce ativa, com origem CadastroAdministrativo e o dadosSimulados declarado.",
+        "description": "Cada sentido é um cadastro próprio. Código e letreiro não podem usar o prefixo reservado SIM-.\r\nSem Location, porque o MVP não tem consulta pública de linha por id; a linha aparece em GET /api/v1/linhas.",
+        "operationId": "CadastrarLinha",
+        "requestBody": {
+          "description": "Cancelamento da requisição.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CadastroLinhaDto"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CadastroLinhaDto"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CadastroLinhaDto"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinhaAdministrativaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ChaveAdministrativa": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/observacoes-passagem": {
+      "post": {
+        "tags": [
+          "Administração"
+        ],
+        "summary": "Registra que um ônibus de uma linha foi visto na parada.",
+        "description": "observadaEm precisa trazer o fuso e estar entre 24 horas antes e 2 minutos depois do horário\r\ndo servidor. O registro sai como RegistroManual, com verificada e oficialSptrans sempre false.\r\nUm horário ainda no futuro só aparece em ultimas-passagens quando chegar.",
+        "operationId": "RegistrarObservacaoPassagem",
+        "requestBody": {
+          "description": "Cancelamento da requisição.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ObservacaoPassagemDto"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ObservacaoPassagemDto"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ObservacaoPassagemDto"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PassagemRegistradaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ChaveAdministrativa": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/paradas": {
+      "post": {
+        "tags": [
+          "Administração"
+        ],
+        "summary": "Cadastra uma parada. Ela nasce ativa, com origem CadastroAdministrativo e o dadosSimulados declarado.",
+        "description": "O operador precisa declarar dadosSimulados (true para um cadastro fictício); a API não presume\r\nnenhum dos dois. O prefixo SIM- é reservado aos dados de demonstração. Um cadastro fictício\r\nnão pode ter endereço nem coordenada. Nenhum cadastro administrativo é verificado.",
+        "operationId": "CadastrarParada",
+        "requestBody": {
+          "description": "Cancelamento da requisição.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CadastroParadaDto"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CadastroParadaDto"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CadastroParadaDto"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParadaAdministrativaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ChaveAdministrativa": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/paradas/{id}": {
+      "put": {
+        "tags": [
+          "Administração"
+        ],
+        "summary": "Atualiza nome, endereço, coordenada e situação (ativa) de uma parada, inclusive inativa.",
+        "description": "Substituição completa. codigoExterno, origem e dadosSimulados não mudam. Desativar substitui a exclusão: o histórico é preservado.",
+        "operationId": "AtualizarParada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Cancelamento da requisição.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AtualizacaoParadaDto"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AtualizacaoParadaDto"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AtualizacaoParadaDto"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParadaAdministrativaDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ChaveAdministrativa": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/paradas/{id}/linhas/{linhaId}": {
+      "put": {
+        "tags": [
+          "Administração"
+        ],
+        "summary": "Indica que a linha atende a parada. Idempotente: repetir a chamada também devolve 204.",
+        "operationId": "AssociarLinhaAParada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id interno da parada (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "linhaId",
+            "in": "path",
+            "description": "Id interno da linha (inteiro ≥ 1).",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ChaveAdministrativa": [ ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AlternativaDto": {
+        "required": [
+          "posicao",
+          "linhaId",
+          "codigoLinha",
+          "letreiro",
+          "situacao",
+          "previstaPara",
+          "esperaMinutos",
+          "percursoEstimadoMinutos",
+          "tempoTotalEstimadoMinutos",
+          "chegadaEstimadaAoDestino",
+          "baldeacoes",
+          "origemPercurso"
+        ],
+        "type": "object",
+        "properties": {
+          "posicao": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "linhaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoLinha": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "situacao": {
+            "$ref": "#/components/schemas/SituacaoAlternativa"
+          },
+          "previstaPara": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "esperaMinutos": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "percursoEstimadoMinutos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tempoTotalEstimadoMinutos": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "chegadaEstimadaAoDestino": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "baldeacoes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "origemPercurso": {
+            "$ref": "#/components/schemas/OrigemDado"
+          }
+        },
+        "description": "`Alternativa` (seção 4.7). Uma linha sem previsão tem `posicao`, `previstaPara`,\r\n`esperaMinutos`, `tempoTotalEstimadoMinutos` e `chegadaEstimadaAoDestino` nulos; o\r\npercurso continua informado."
+      },
+      "AlternativasDeslocamentoDto": {
+        "required": [
+          "paradaId",
+          "codigoExternoParada",
+          "nomeParada",
+          "destino",
+          "criterio",
+          "situacao",
+          "comparacaoCompleta",
+          "statusPrevisao",
+          "origemPrevisao",
+          "dadosSimulados",
+          "consultadoEm",
+          "alternativas",
+          "avisos"
+        ],
+        "type": "object",
+        "properties": {
+          "paradaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoExternoParada": {
+            "type": "string"
+          },
+          "nomeParada": {
+            "type": "string"
+          },
+          "destino": {
+            "$ref": "#/components/schemas/DestinoConsultadoDto"
+          },
+          "criterio": {
+            "$ref": "#/components/schemas/CriterioAlternativas"
+          },
+          "situacao": {
+            "$ref": "#/components/schemas/SituacaoAlternativas"
+          },
+          "comparacaoCompleta": {
+            "type": "boolean"
+          },
+          "statusPrevisao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StatusPrevisao"
+              }
+            ]
+          },
+          "origemPrevisao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OrigemDado"
+              }
+            ]
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "consultadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "alternativas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlternativaDto"
+            }
+          },
+          "avisos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvisoDto"
+            }
+          }
+        },
+        "description": "`AlternativasDeslocamento` (seção 4.7)."
+      },
+      "AtualizacaoParadaDto": {
+        "required": [
+          "nome",
+          "ativa"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "endereco": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "coordenada": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoordenadaEntradaDto"
+              }
+            ]
+          },
+          "ativa": {
+            "type": "boolean"
+          }
+        },
+        "description": "Corpo de `PUT /api/v1/admin/paradas/{id}` (seção 5.3): substituição completa dos dados editáveis."
+      },
+      "AvisoDto": {
+        "required": [
+          "codigo",
+          "mensagem"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "mensagem": {
+            "type": "string"
+          }
+        },
+        "description": "`Aviso` (seção 3.2)."
+      },
+      "CadastroLinhaDto": {
+        "required": [
+          "codigo",
+          "letreiro",
+          "terminalPrincipal",
+          "terminalSecundario",
+          "sentido",
+          "dadosSimulados"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "terminalPrincipal": {
+            "type": "string"
+          },
+          "terminalSecundario": {
+            "type": "string"
+          },
+          "sentido": {
+            "$ref": "#/components/schemas/SentidoLinha"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          }
+        },
+        "description": "Corpo de `POST /api/v1/admin/linhas` (seção 5.4)."
+      },
+      "CadastroParadaDto": {
+        "required": [
+          "codigoExterno",
+          "nome",
+          "dadosSimulados"
+        ],
+        "type": "object",
+        "properties": {
+          "codigoExterno": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "endereco": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "coordenada": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoordenadaEntradaDto"
+              }
+            ]
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          }
+        },
+        "description": "Corpo de `POST /api/v1/admin/paradas` (seção 5.2)."
+      },
+      "CoordenadaDto": {
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "`Coordenada` (seção 3.3)."
+      },
+      "CoordenadaEntradaDto": {
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "`Coordenada` no corpo de uma requisição (seção 3.3)."
+      },
+      "CriterioAlternativas": {
+        "enum": [
+          "MenorTempoTotalEstimado"
+        ]
+      },
+      "DestinoConsultadoDto": {
+        "required": [
+          "id",
+          "nome",
+          "tipo"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoDestino"
+          }
+        },
+        "description": "Destino consultado nas alternativas: `{ id, nome, tipo }` (seção 4.7)."
+      },
+      "DestinoDto": {
+        "required": [
+          "id",
+          "nome",
+          "tipo",
+          "origem",
+          "dadosSimulados"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoDestino"
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          }
+        },
+        "description": "`Destino` (seção 3.5)."
+      },
+      "HttpValidationProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "LinhaAdministrativaDto": {
+        "required": [
+          "id",
+          "codigo",
+          "letreiro",
+          "terminalPrincipal",
+          "terminalSecundario",
+          "sentido",
+          "origem",
+          "dadosSimulados",
+          "ativa",
+          "criadoEm"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "terminalPrincipal": {
+            "type": "string"
+          },
+          "terminalSecundario": {
+            "type": "string"
+          },
+          "sentido": {
+            "$ref": "#/components/schemas/SentidoLinha"
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "ativa": {
+            "type": "boolean"
+          },
+          "criadoEm": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "`Linha` mais `ativa` e `criadoEm` (seção 5.4)."
+      },
+      "LinhaDto": {
+        "required": [
+          "id",
+          "codigo",
+          "letreiro",
+          "terminalPrincipal",
+          "terminalSecundario",
+          "sentido",
+          "origem",
+          "dadosSimulados"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "terminalPrincipal": {
+            "type": "string"
+          },
+          "terminalSecundario": {
+            "type": "string"
+          },
+          "sentido": {
+            "$ref": "#/components/schemas/SentidoLinha"
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          }
+        },
+        "description": "`Linha` (seção 3.4)."
+      },
+      "NivelConfirmacao": {
+        "enum": [
+          "Previsao",
+          "ObservacaoSimulada",
+          "RegistroManual",
+          "VerificadaFonteConfiavel"
+        ],
+        "description": "Quanto uma informação de chegada ou de passagem foi confirmada."
+      },
+      "ObservacaoPassagemDto": {
+        "required": [
+          "paradaId",
+          "linhaId",
+          "observadaEm",
+          "origemRegistro"
+        ],
+        "type": "object",
+        "properties": {
+          "paradaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "linhaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "observadaEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "prefixoVeiculo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "origemRegistro": {
+            "type": "string"
+          }
+        },
+        "description": "Corpo de `POST /api/v1/admin/observacoes-passagem` (seção 5.6)."
+      },
+      "OrigemDado": {
+        "enum": [
+          "Simulado",
+          "CadastroAdministrativo",
+          "OlhoVivo"
+        ],
+        "description": "Método pelo qual um dado entrou no sistema. Não indica se ele é fictício nem verificado."
+      },
+      "PaginaDtoOfDestinoDto": {
+        "required": [
+          "itens",
+          "pagina",
+          "tamanhoPagina",
+          "totalItens",
+          "totalPaginas"
+        ],
+        "type": "object",
+        "properties": {
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DestinoDto"
+            }
+          },
+          "pagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tamanhoPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItens": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Envelope `Pagina&lt;T&gt;` (seção 3.1)."
+      },
+      "PaginaDtoOfLinhaDto": {
+        "required": [
+          "itens",
+          "pagina",
+          "tamanhoPagina",
+          "totalItens",
+          "totalPaginas"
+        ],
+        "type": "object",
+        "properties": {
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinhaDto"
+            }
+          },
+          "pagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tamanhoPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItens": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Envelope `Pagina&lt;T&gt;` (seção 3.1)."
+      },
+      "PaginaDtoOfParadaDto": {
+        "required": [
+          "itens",
+          "pagina",
+          "tamanhoPagina",
+          "totalItens",
+          "totalPaginas"
+        ],
+        "type": "object",
+        "properties": {
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParadaDto"
+            }
+          },
+          "pagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tamanhoPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItens": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Envelope `Pagina&lt;T&gt;` (seção 3.1)."
+      },
+      "ParadaAdministrativaDto": {
+        "required": [
+          "id",
+          "codigoExterno",
+          "nome",
+          "endereco",
+          "coordenada",
+          "origem",
+          "dadosSimulados",
+          "ativa",
+          "criadoEm"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoExterno": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "endereco": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "coordenada": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoordenadaDto"
+              }
+            ]
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "ativa": {
+            "type": "boolean"
+          },
+          "criadoEm": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "`ParadaAdministrativa` = `Parada` mais `ativa` e `criadoEm` (seção 5.2)."
+      },
+      "ParadaDetalheDto": {
+        "required": [
+          "id",
+          "codigoExterno",
+          "nome",
+          "endereco",
+          "coordenada",
+          "origem",
+          "dadosSimulados",
+          "linhas"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoExterno": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "endereco": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "coordenada": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoordenadaDto"
+              }
+            ]
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "linhas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinhaDto"
+            }
+          }
+        },
+        "description": "`ParadaDetalhe`: `Parada` mais as linhas ativas que a atendem (seções 3.3 e 4.2)."
+      },
+      "ParadaDto": {
+        "required": [
+          "id",
+          "codigoExterno",
+          "nome",
+          "endereco",
+          "coordenada",
+          "origem",
+          "dadosSimulados"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoExterno": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "endereco": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "coordenada": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoordenadaDto"
+              }
+            ]
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          }
+        },
+        "description": "`Parada` (seção 3.3)."
+      },
+      "PassagemDto": {
+        "required": [
+          "id",
+          "linhaId",
+          "codigoLinha",
+          "letreiro",
+          "observadaEm",
+          "registradaEm",
+          "minutosDesdeObservacao",
+          "desatualizada",
+          "prefixoVeiculo",
+          "nivelConfirmacao",
+          "verificada",
+          "oficialSptrans",
+          "origemRegistro",
+          "dadosSimulados",
+          "aviso"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "linhaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoLinha": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "observadaEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "registradaEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "minutosDesdeObservacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "desatualizada": {
+            "type": "boolean"
+          },
+          "prefixoVeiculo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nivelConfirmacao": {
+            "$ref": "#/components/schemas/NivelConfirmacao"
+          },
+          "verificada": {
+            "type": "boolean"
+          },
+          "oficialSptrans": {
+            "type": "boolean"
+          },
+          "origemRegistro": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "aviso": {
+            "$ref": "#/components/schemas/AvisoDto"
+          }
+        },
+        "description": "`Passagem` (seção 4.6). Instantes no horário de São Paulo."
+      },
+      "PassagemRegistradaDto": {
+        "required": [
+          "paradaId",
+          "id",
+          "linhaId",
+          "codigoLinha",
+          "letreiro",
+          "observadaEm",
+          "registradaEm",
+          "minutosDesdeObservacao",
+          "desatualizada",
+          "prefixoVeiculo",
+          "nivelConfirmacao",
+          "verificada",
+          "oficialSptrans",
+          "origemRegistro",
+          "dadosSimulados",
+          "aviso"
+        ],
+        "type": "object",
+        "properties": {
+          "paradaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "linhaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoLinha": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "observadaEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "registradaEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "minutosDesdeObservacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "desatualizada": {
+            "type": "boolean"
+          },
+          "prefixoVeiculo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nivelConfirmacao": {
+            "$ref": "#/components/schemas/NivelConfirmacao"
+          },
+          "verificada": {
+            "type": "boolean"
+          },
+          "oficialSptrans": {
+            "type": "boolean"
+          },
+          "origemRegistro": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "aviso": {
+            "$ref": "#/components/schemas/AvisoDto"
+          }
+        },
+        "description": "`Passagem` mais `paradaId` (seção 5.6): o recibo do registro manual. Minutos e\r\ndesatualização são calculados no instante do registro (seção 4.6.3)."
+      },
+      "PrevisaoDto": {
+        "required": [
+          "linhaId",
+          "codigoLinha",
+          "letreiro",
+          "previstaPara",
+          "esperaMinutos",
+          "prefixoVeiculo",
+          "nivelConfirmacao"
+        ],
+        "type": "object",
+        "properties": {
+          "linhaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoLinha": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          },
+          "previstaPara": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "esperaMinutos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prefixoVeiculo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nivelConfirmacao": {
+            "$ref": "#/components/schemas/NivelConfirmacao"
+          }
+        },
+        "description": "`Previsao` (seção 4.5): uma chegada prevista, nunca uma passagem. `previstaPara` no\r\nhorário de São Paulo; `esperaMinutos` arredondado para baixo e nunca negativo."
+      },
+      "PrevisoesParadaDto": {
+        "required": [
+          "paradaId",
+          "codigoExternoParada",
+          "nomeParada",
+          "status",
+          "origem",
+          "dadosSimulados",
+          "consultadoEm",
+          "previsoes",
+          "linhasSemPrevisao",
+          "avisos"
+        ],
+        "type": "object",
+        "properties": {
+          "paradaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoExternoParada": {
+            "type": "string"
+          },
+          "nomeParada": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusPrevisao"
+          },
+          "origem": {
+            "$ref": "#/components/schemas/OrigemDado"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "consultadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "previsoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrevisaoDto"
+            }
+          },
+          "linhasSemPrevisao": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenciaLinhaDto"
+            }
+          },
+          "avisos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvisoDto"
+            }
+          }
+        },
+        "description": "`PrevisoesParada` (seção 4.5)."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ReferenciaLinhaDto": {
+        "required": [
+          "linhaId",
+          "codigoLinha",
+          "letreiro"
+        ],
+        "type": "object",
+        "properties": {
+          "linhaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoLinha": {
+            "type": "string"
+          },
+          "letreiro": {
+            "type": "string"
+          }
+        },
+        "description": "`ReferenciaLinha`, a forma curta da linha (seção 3.4)."
+      },
+      "ResumoParadaDto": {
+        "required": [
+          "consultadoEm",
+          "dadosSimulados",
+          "situacao",
+          "partesIndisponiveis",
+          "parada",
+          "previsoes",
+          "ultimasPassagens",
+          "avisos"
+        ],
+        "type": "object",
+        "properties": {
+          "consultadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "situacao": {
+            "$ref": "#/components/schemas/SituacaoResumo"
+          },
+          "partesIndisponiveis": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "parada": {
+            "$ref": "#/components/schemas/ParadaDetalheDto"
+          },
+          "previsoes": {
+            "$ref": "#/components/schemas/PrevisoesParadaDto"
+          },
+          "ultimasPassagens": {
+            "$ref": "#/components/schemas/UltimasPassagensParadaDto"
+          },
+          "avisos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvisoDto"
+            }
+          }
+        },
+        "description": "`ResumoParada` (seção 4.8): as três partes têm o mesmo formato das respostas individuais e\r\no mesmo `consultadoEm`. Os avisos de cada parte ficam dentro dela."
+      },
+      "SaudeResponse": {
+        "required": [
+          "status",
+          "escopo",
+          "verificadoEm",
+          "verificacoes"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "escopo": {
+            "type": "string"
+          },
+          "verificadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "verificacoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VerificacaoSaudeResponse"
+            }
+          }
+        }
+      },
+      "SentidoLinha": {
+        "enum": [
+          "PrincipalParaSecundario",
+          "SecundarioParaPrincipal"
+        ],
+        "description": "Sentido de um cadastro de linha. Cada sentido é um cadastro separado."
+      },
+      "SituacaoAlternativa": {
+        "enum": [
+          "Comparavel",
+          "SemPrevisao"
+        ]
+      },
+      "SituacaoAlternativas": {
+        "enum": [
+          "Comparadas",
+          "SemComparacao",
+          "SemLinhaDireta"
+        ]
+      },
+      "SituacaoResumo": {
+        "enum": [
+          "Completo",
+          "Parcial"
+        ]
+      },
+      "StatusPrevisao": {
+        "enum": [
+          "Disponivel",
+          "SemPrevisoes",
+          "ProvedorIndisponivel"
+        ]
+      },
+      "TipoDestino": {
+        "enum": [
+          "Terminal",
+          "Estacao",
+          "PontoReferencia"
+        ]
+      },
+      "UltimasPassagensParadaDto": {
+        "required": [
+          "paradaId",
+          "codigoExternoParada",
+          "nomeParada",
+          "dadosSimulados",
+          "consultadoEm",
+          "limiteDesatualizacaoMinutos",
+          "passagens",
+          "linhasSemRegistro",
+          "avisos"
+        ],
+        "type": "object",
+        "properties": {
+          "paradaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoExternoParada": {
+            "type": "string"
+          },
+          "nomeParada": {
+            "type": "string"
+          },
+          "dadosSimulados": {
+            "type": "boolean"
+          },
+          "consultadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "limiteDesatualizacaoMinutos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "passagens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PassagemDto"
+            }
+          },
+          "linhasSemRegistro": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenciaLinhaDto"
+            }
+          },
+          "avisos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvisoDto"
+            }
+          }
+        },
+        "description": "`UltimasPassagensParada` (seção 4.6)."
+      },
+      "VerificacaoSaudeResponse": {
+        "required": [
+          "nome",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ChaveAdministrativa": {
+        "type": "apiKey",
+        "description": "Chave das rotas /api/v1/admin, configurada em Admin:Chave (user-secrets ou variável de ambiente). Em Development sem chave configurada, as rotas ficam abertas para a demonstração local; nos demais ambientes, sem chave configurada, respondem 403.",
+        "name": "X-PontoVoz-Admin-Key",
+        "in": "header"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Destinos"
+    },
+    {
+      "name": "Health"
+    },
+    {
+      "name": "Linhas"
+    },
+    {
+      "name": "Paradas"
+    },
+    {
+      "name": "Administração"
+    }
+  ]
+}
