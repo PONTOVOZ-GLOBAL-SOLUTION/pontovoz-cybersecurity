@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PontoVoz · Risco Cidadão</title>
+  <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">
+      <span class="marca-icone" aria-hidden="true">PV</span>
+      <div>
+        <h1>PontoVoz <span class="marca-modulo">Cybersecurity</span></h1>
+        <p class="marca-sub">Painel Risco Cidadão · proteção de dados pessoais no totem de mobilidade</p>
+      </div>
+    </div>
+    <div class="topo-status">
+      <span id="status-protecao" class="pilula pilula-ok">Proteção ativa</span>
+      <span id="status-ia" class="pilula">IA: verificando…</span>
+      <span id="status-conexao" class="pilula">Conectando…</span>
+    </div>
+  </header>
+
+  <div id="area-chave" class="aviso-chave" hidden>
+    <label for="chave-admin">A API exige a chave administrativa (X-PontoVoz-Admin-Key):</label>
+    <input id="chave-admin" type="password" autocomplete="off" placeholder="Chave configurada em Admin:Chave">
+    <button id="salvar-chave" class="botao botao-secundario" type="button">Usar chave</button>
+  </div>
+
+  <main class="grade">
+    <section class="cartao farol-cartao" aria-labelledby="titulo-risco">
+      <h2 class="rotulo-secao">Indicador de Risco Cidadão</h2>
+      <div class="farol-corpo">
+        <div class="farol" role="img" id="farol" aria-label="Nível de risco">
+          <span class="luz luz-vermelho"></span>
+          <span class="luz luz-amarelo"></span>
+          <span class="luz luz-verde"></span>
+        </div>
+        <div class="farol-texto">
+          <p id="nivel-risco" class="nivel">—</p>
+          <h3 id="titulo-risco" class="titulo-risco">Carregando…</h3>
+          <p id="descricao-risco" class="descricao-risco"></p>
+        </div>
+      </div>
+      <div class="mensagem-cidadao">
+        <p class="rotulo-mensagem">Mensagem para o cidadão</p>
+        <p id="mensagem-cidadao" class="texto-mensagem">—</p>
+        <p id="origem-mensagem" class="origem-mensagem"></p>
+      </div>
+    </section>
+
+    <section class="indicadores" aria-label="Totais">
+      <div class="indicador"><span class="indicador-valor" id="kpi-analisados">0</span><span class="indicador-rotulo">Eventos analisados</span></div>
+      <div class="indicador"><span class="indicador-valor" id="kpi-identificados">0</span><span class="indicador-rotulo">Dados pessoais identificados</span></div>
+      <div class="indicador indicador-alerta"><span class="indicador-valor" id="kpi-bloqueados">0</span><span class="indicador-rotulo">Tentativas inseguras bloqueadas</span></div>
+      <div class="indicador indicador-ok"><span class="indicador-valor" id="kpi-sem-risco">0</span><span class="indicador-rotulo">Tratados sem risco identificado</span></div>
+    </section>
+
+    <section class="cartao cenarios" aria-labelledby="titulo-cenarios">
+      <div class="cabecalho-cartao">
+        <h2 id="titulo-cenarios" class="rotulo-secao">Cenários de demonstração</h2>
+        <button id="reiniciar" class="botao botao-secundario" type="button">Reiniciar demonstração</button>
+      </div>
+      <ol class="lista-cenarios">
+        <li class="cenario">
+          <h3><span class="numero">1</span> Consulta segura</h3>
+          <p>Consulta real do PontoVoz (<code>GET /api/v1/paradas?codigoExterno=SIM-P001</code>), sem dado pessoal.</p>
+          <button id="cenario-1" class="botao" type="button">Executar consulta</button>
+        </li>
+        <li class="cenario">
+          <h3><span class="numero">2</span> Dado pessoal detectado</h3>
+          <p>JSON fictício enviado ao motor de parsing PII. Edite o conteúdo se quiser.</p>
+          <textarea id="json-cenario-2" spellcheck="false" rows="9" aria-label="JSON do cenário 2"></textarea>
+          <button id="cenario-2" class="botao" type="button">Analisar JSON</button>
+        </li>
+        <li class="cenario">
+          <h3><span class="numero">3</span> Tentativa de vazamento</h3>
+          <p>Código inseguro de propósito tenta levar o cadastro ao log, a um serviço externo e à resposta.</p>
+          <button id="cenario-3" class="botao botao-perigo" type="button">Executar tentativa controlada</button>
+          <div class="botoes-extra">
+            <button id="cenario-3-erro" class="botao botao-secundario" type="button">Exceção com o cadastro</button>
+            <button id="cenario-3-banco" class="botao botao-secundario" type="button">Gravar CPF no banco (rota real)</button>
+          </div>
+        </li>
+        <li class="cenario">
+          <h3><span class="numero">4</span> Explicação por IA</h3>
+          <p>Traduz o evento de maior risco em linguagem acessível, com o LLM ou com o fallback identificado.</p>
+          <button id="cenario-4" class="botao botao-destaque" type="button">Explicar evento com IA</button>
+        </li>
+      </ol>
+    </section>
+
+    <section class="cartao resultado" aria-labelledby="titulo-resultado">
+      <h2 id="titulo-resultado" class="rotulo-secao">Resultado da última ação</h2>
+      <div id="resultado" class="resultado-corpo"><p class="vazio">Execute um cenário para ver a resposta do backend.</p></div>
+    </section>
+
+    <section class="cartao eventos" aria-labelledby="titulo-eventos">
+      <div class="cabecalho-cartao">
+        <h2 id="titulo-eventos" class="rotulo-secao">Histórico de eventos de segurança</h2>
+        <button id="exportar" class="botao botao-secundario" type="button">Exportar auditoria (JSON)</button>
+      </div>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th>Horário</th><th>Risco</th><th>Evento</th><th>Categoria</th><th>Fonte → destino</th><th>Ação</th><th>Mensagem ao cidadão</th><th>Origem</th></tr>
+          </thead>
+          <tbody id="tabela-eventos"><tr><td colspan="8" class="vazio">Nenhum evento registrado.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="cartao trilha" aria-labelledby="titulo-trilha">
+      <h2 id="titulo-trilha" class="rotulo-secao">Auditoria técnica · trilha da requisição</h2>
+      <div id="trilha" class="trilha-corpo"><p class="vazio">Selecione um evento no histórico para ver a trilha Source → Classificação → Sink → Ação.</p></div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="legenda">
+      <span><i class="ponto ponto-verde"></i> Verde: nenhuma tentativa insegura observada</span>
+      <span><i class="ponto ponto-amarelo"></i> Amarelo: dado pessoal detectado e protegido</span>
+      <span><i class="ponto ponto-vermelho"></i> Vermelho: tentativa de saída insegura interceptada (não indica vazamento)</span>
+    </div>
+    <p>FIAP · Global Solution 2026.2 · CitizenTech · Cybersecurity — dados exclusivamente fictícios.</p>
+  </footer>
+
+  <script src="painel.js"></script>
+</body>
+</html>

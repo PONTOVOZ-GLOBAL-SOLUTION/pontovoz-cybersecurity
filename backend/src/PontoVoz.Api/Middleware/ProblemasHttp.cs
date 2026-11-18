@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using PontoVoz.Api.Application.Erros;
+using PontoVoz.Api.Cybersecurity.Taint;
 using PontoVoz.Api.Domain.Exceptions;
 
 namespace PontoVoz.Api.Middleware;
@@ -64,8 +65,21 @@ internal static class ProblemasHttp
             Criar(new ProblemDetails(), StatusCodes.Status422UnprocessableEntity, TituloRegraNegocio(erro.Codigo), erro.Codigo, erro.Message),
         ProvedorPrevisoesIndisponivelException erro =>
             Criar(new ProblemDetails(), StatusCodes.Status503ServiceUnavailable, "Previsões indisponíveis", erro.Codigo, erro.Message),
+        SaidaBloqueadaException erro => DadoPessoalBloqueado(erro),
         _ => null,
     };
+
+    /// <summary>
+    /// 422 <c>DadoPessoalBloqueado</c>: o Taint Analysis recusou a operação porque ela levaria um dado
+    /// pessoal a um destino não autorizado (por exemplo, gravá-lo no banco). O detalhe não repete o valor.
+    /// </summary>
+    private static ProblemDetails DadoPessoalBloqueado(SaidaBloqueadaException erro)
+    {
+        ProblemDetails problema = Criar(new ProblemDetails(), StatusCodes.Status422UnprocessableEntity, "Dado pessoal não permitido", "DadoPessoalBloqueado",
+            "A operação foi recusada porque enviaria uma informação pessoal para um destino não autorizado. Remova o dado pessoal e tente novamente.");
+        problema.Extensions["eventoSeguranca"] = erro.EventoId;
+        return problema;
+    }
 
     private static int Status(TipoErroAplicacao tipo) => tipo switch
     {

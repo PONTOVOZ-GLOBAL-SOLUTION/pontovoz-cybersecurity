@@ -1,0 +1,177 @@
+Testes do módulo de Cybersecurity (xUnit v3) — total 176, aprovados 176, falhas 0, ignorados 0
+[APROVADO] AuditoriaRiscoTests.AnaliseSemDeteccao_ContinuaVerde_ComMensagemPadrao
+[APROVADO] AuditoriaRiscoTests.Capacidade_DescartaOsEventosMaisAntigos
+[APROVADO] AuditoriaRiscoTests.ClassificarEvento_SegueAPoliticaDocumentada(codigo: \"PII_ANALISE_SEM_DETECCAO\", esperado: Verde)
+[APROVADO] AuditoriaRiscoTests.ClassificarEvento_SegueAPoliticaDocumentada(codigo: \"PII_DETECTADO_PROTEGIDO\", esperado: Amarelo)
+[APROVADO] AuditoriaRiscoTests.ClassificarEvento_SegueAPoliticaDocumentada(codigo: \"PII_ENTRADA_REJEITADA\", esperado: Amarelo)
+[APROVADO] AuditoriaRiscoTests.ClassificarEvento_SegueAPoliticaDocumentada(codigo: \"PII_TAINT_SINK_BLOCKED\", esperado: Vermelho)
+[APROVADO] AuditoriaRiscoTests.DadoPessoalDetectado_RiscoAmarelo_EEventoVaiParaAFilaDaIa
+[APROVADO] AuditoriaRiscoTests.EventosForaDaJanela_NaoContamParaORisco
+[APROVADO] AuditoriaRiscoTests.Indicadores_ContamCadaTipoDeEvento_EReiniciarZeraTudo
+[APROVADO] AuditoriaRiscoTests.Registro_NaoGuardaValorOriginal_MesmoSeOChamadorTentar
+[APROVADO] AuditoriaRiscoTests.SemEventos_RiscoVerde
+[APROVADO] AuditoriaRiscoTests.SinkBloqueado_RiscoVermelho_PrevaleceSobreEventosPosterioresMaisLeves
+[APROVADO] ClientesLlmTests.Chave_PodeVirDaVariavelDeAmbienteConfigurada
+[APROVADO] ClientesLlmTests.ErroHttp_ViraFalhaComMotivo(status: BadRequest, motivo: ErroHttp)
+[APROVADO] ClientesLlmTests.ErroHttp_ViraFalhaComMotivo(status: InternalServerError, motivo: ServicoIndisponivel)
+[APROVADO] ClientesLlmTests.ErroHttp_ViraFalhaComMotivo(status: ServiceUnavailable, motivo: ServicoIndisponivel)
+[APROVADO] ClientesLlmTests.ErroHttp_ViraFalhaComMotivo(status: TooManyRequests, motivo: ServicoIndisponivel)
+[APROVADO] ClientesLlmTests.ErroHttp_ViraFalhaComMotivo(status: Unauthorized, motivo: ErroHttp)
+[APROVADO] ClientesLlmTests.FalhaDeConexao_ViraFalhaConexao
+[APROVADO] ClientesLlmTests.Gemini_EnviaPromptNoFormatoDaApi_ELeOTexto
+[APROVADO] ClientesLlmTests.OpenAi_EnviaMensagensComChaveBearer_ELeOTexto
+[APROVADO] ClientesLlmTests.ProvedorLento_ViraTempoEsgotado
+[APROVADO] ClientesLlmTests.RespostaSemTexto_ViraRespostaInvalida(corpo: \"nao e json\")
+[APROVADO] ClientesLlmTests.RespostaSemTexto_ViraRespostaInvalida(corpo: \"{\\\"candidates\\\":[]}\")
+[APROVADO] ClientesLlmTests.RespostaSemTexto_ViraRespostaInvalida(corpo: \"{\\\"candidates\\\":[{\\\"content\\\":{\\\"parts\\\":[{\\\"text\\\":\\\"\\\"}]}}\"···)
+[APROVADO] ClientesLlmTests.SemChave_NaoFazRequisicao
+[APROVADO] CybersecurityHttpTests.AnaliseDeJson_ClassificaEMascara_SemDevolverValorOriginal
+[APROVADO] CybersecurityHttpTests.ConsultaPublica_ContinuaIgual_ERegistraAnaliseSemRisco
+[APROVADO] CybersecurityHttpTests.CorpoAcimaDoLimite_EhRecusadoAntesDosControllers
+[APROVADO] CybersecurityHttpTests.CorpoEmTextoComDadoPessoal_TambemEhVarrido
+[APROVADO] CybersecurityHttpTests.DadoPessoalNaQueryString_EhMarcado_ENaoApareceNaResposta
+[APROVADO] CybersecurityHttpTests.Demonstracao_DesligadaNaConfiguracao_Responde404
+[APROVADO] CybersecurityHttpTests.Demonstracao_NaoExisteForaDeDevelopment
+[APROVADO] CybersecurityHttpTests.DocumentoOpenApiDoModulo_ListaAsRotasDeSeguranca
+[APROVADO] CybersecurityHttpTests.ExcecaoComPayload_ViraErroGenerico_ELogSanitizado
+[APROVADO] CybersecurityHttpTests.ExplicacaoComLlm_UsaSoDadosSanitizados_EAtualizaOEvento
+[APROVADO] CybersecurityHttpTests.ExplicacaoSemProvedor_UsaFallbackIdentificado_SemChamadaExterna
+[APROVADO] CybersecurityHttpTests.FormularioComDadoPessoal_EhAnalisado
+[APROVADO] CybersecurityHttpTests.JsonMalformadoComDadoPessoal_MantemOErroDoContrato_ESemVazarNoLog
+[APROVADO] CybersecurityHttpTests.JsonProfundoDemais_EhRecusado
+[APROVADO] CybersecurityHttpTests.PainelInicial_EstaVerde_ComMensagemPadrao
+[APROVADO] CybersecurityHttpTests.Painel_EhServidoComoPaginaEstatica
+[APROVADO] CybersecurityHttpTests.ProvedoresDeLogDaAplicacao_SaoTodosProtegidos
+[APROVADO] CybersecurityHttpTests.ReiniciarDemonstracao_VoltaAoVerde
+[APROVADO] CybersecurityHttpTests.RotaRealComCpfNoCampoDeOrigem_TemAGravacaoRecusada
+[APROVADO] CybersecurityHttpTests.RotaRealSemDadoPessoal_ContinuaGravando
+[APROVADO] CybersecurityHttpTests.RotasDoPainel_ExigemAChaveQuandoConfigurada
+[APROVADO] CybersecurityHttpTests.RotasDoPainel_ForaDeDevelopmentSemChave_Respondem403
+[APROVADO] CybersecurityHttpTests.TraducaoAutomatica_PreencheAMensagemDosEventosComRisco
+[APROVADO] CybersecurityHttpTests.TrilhaDoEvento_LigaEntradaESaidasDaMesmaRequisicao
+[APROVADO] CybersecurityHttpTests.VazamentoControlado_BloqueiaLogServicoExternoEResposta
+[APROVADO] MascaradorPiiTests.MarcadorDeBloqueio_NaoTemNenhumTrechoDoValor
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Cpf, valor: \"11144477735\", esperado: \"***.444.***-35\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Cpf, valor: \"123.456.789-00\", esperado: \"***.456.***-00\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: DocumentoIdentificador, valor: \"AB1234567\", esperado: \"*******67\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Email, valor: \"passageiro.ficticio@exemplo.com.br\", esperado: \"p***@e***.br\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Rg, valor: \"12.345.678-X\", esperado: \"**.***.**8-X\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Saude, valor: \"asma\", esperado: \"[DADO DE SAÚDE PROTEGIDO]\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Senha, valor: \"Senha@Teste123\", esperado: \"[SENHA REMOVIDA]\")
+[APROVADO] MascaradorPiiTests.Mascarar_SegueORegraDaCategoria(categoria: Telefone, valor: \"(11) 91234-5678\", esperado: \"(**) *****-5678\")
+[APROVADO] MotorPiiTests.CamposAninhadosEListas_TemCaminhoJsonCompleto
+[APROVADO] MotorPiiTests.CamposDeQueryOuFormulario_SaoAnalisadosComoObjeto
+[APROVADO] MotorPiiTests.CelularSemPontuacao_EhTelefone_NaoCpf
+[APROVADO] MotorPiiTests.ColchetesDentroDeTexto_NaoContamComoProfundidade
+[APROVADO] MotorPiiTests.CorpoVazio_NaoEhAnalisado(json: \"   \")
+[APROVADO] MotorPiiTests.CorpoVazio_NaoEhAnalisado(json: \"\")
+[APROVADO] MotorPiiTests.CorpoVazio_NaoEhAnalisado(json: null)
+[APROVADO] MotorPiiTests.CpfComFormatacaoDiferente_EhReconhecido(json: \"{\\\"cpf\\\":\\\"111 444 777 35\\\"}\", regra: \"campo-cpf+dv-valido\")
+[APROVADO] MotorPiiTests.CpfComFormatacaoDiferente_EhReconhecido(json: \"{\\\"cpf\\\":\\\"11144477735\\\"}\", regra: \"campo-cpf+dv-valido\")
+[APROVADO] MotorPiiTests.CpfComFormatacaoDiferente_EhReconhecido(json: \"{\\\"identificacao\\\":11144477735}\", regra: \"texto-11-digitos+dv\")
+[APROVADO] MotorPiiTests.CpfComFormatacaoDiferente_EhReconhecido(json: \"{\\\"origemRegistro\\\":\\\"11144477735\\\"}\", regra: \"texto-11-digitos+dv\")
+[APROVADO] MotorPiiTests.CpfComRotuloEDvInvalido_EhReconhecidoComConfiancaMedia
+[APROVADO] MotorPiiTests.CpfInvalidoEmCampoCpf_AindaEhProtegido_ComRegraDeDvInvalido
+[APROVADO] MotorPiiTests.CpfInvalidoEmCampoGenerico_NaoEhClassificado
+[APROVADO] MotorPiiTests.CpfValidoEmCampoCpf_EhClassificadoEMascarado
+[APROVADO] MotorPiiTests.CpfValidoEmCampoGenerico_EhReconhecidoPeloConteudo
+[APROVADO] MotorPiiTests.DadosDeSaude_SaoSensiveis_ESuprimidos(json: \"{\\\"diagnosticoMedico\\\":\\\"fictício\\\"}\", caminho: \"$.diagnosticoMedico\")
+[APROVADO] MotorPiiTests.DadosDeSaude_SaoSensiveis_ESuprimidos(json: \"{\\\"laudo\\\":\\\"Laudo fictício de baixa visão\\\"}\", caminho: \"$.laudo\")
+[APROVADO] MotorPiiTests.DadosDeSaude_SaoSensiveis_ESuprimidos(json: \"{\\\"observacao\\\":\\\"CID-10 H54 informado\\\"}\", caminho: \"$.observacao\")
+[APROVADO] MotorPiiTests.DadosDeSaude_SaoSensiveis_ESuprimidos(json: \"{\\\"observacao\\\":\\\"Passageiro diagnosticado com epilep\"···, caminho: \"$.observacao\")
+[APROVADO] MotorPiiTests.DadosDeSaude_SaoSensiveis_ESuprimidos(json: \"{\\\"possuiDeficiencia\\\":true}\", caminho: \"$.possuiDeficiencia\")
+[APROVADO] MotorPiiTests.Deteccoes_NaoCarregamOValorOriginal
+[APROVADO] MotorPiiTests.EmailETelefone_SaoReconhecidosEmCamposGenericos
+[APROVADO] MotorPiiTests.EstruturaDeSaude_EhProtegidaPorInteiro
+[APROVADO] MotorPiiTests.ExemploDoProfessor_DocumentoComFormatoDeCpf_EhTagueadoComoCpfEMascarado
+[APROVADO] MotorPiiTests.JsonComElementosDemais_EhEstruturaExcessiva
+[APROVADO] MotorPiiTests.JsonMalformado_EhVarridoComoTexto_ESemValorOriginalNoResultado
+[APROVADO] MotorPiiTests.JsonProfundoDemais_EhEstruturaExcessiva
+[APROVADO] MotorPiiTests.JsonSemDadosPessoais_NaoTemDeteccoes_ESaiIgual
+[APROVADO] MotorPiiTests.ListaDeObjetosComCamposGenericos_EhVarridaPeloConteudo
+[APROVADO] MotorPiiTests.NomeDeCampoComDadoPessoal_TambemEhProtegido
+[APROVADO] MotorPiiTests.Rg_EhMascaradoMantendoSoOsUltimosCaracteres
+[APROVADO] MotorPiiTests.Rg_EhReconhecidoPeloCampoOuPeloTexto(json: \"{\\\"carteiraIdentidade\\\":\\\"MG-12.345.678\\\"}\", regra: \"campo-rg\")
+[APROVADO] MotorPiiTests.Rg_EhReconhecidoPeloCampoOuPeloTexto(json: \"{\\\"numeroRg\\\":\\\"123456789\\\"}\", regra: \"campo-rg\")
+[APROVADO] MotorPiiTests.Rg_EhReconhecidoPeloCampoOuPeloTexto(json: \"{\\\"observacao\\\":\\\"RG 12.345.678-9 apresentado\\\"}\", regra: \"texto-rotulo-rg\")
+[APROVADO] MotorPiiTests.Rg_EhReconhecidoPeloCampoOuPeloTexto(json: \"{\\\"observacao\\\":\\\"documento 12.345.678-9\\\"}\", regra: \"texto-formato-rg\")
+[APROVADO] MotorPiiTests.Rg_EhReconhecidoPeloCampoOuPeloTexto(json: \"{\\\"rg\\\":\\\"12.345.678-X\\\"}\", regra: \"campo-rg\")
+[APROVADO] MotorPiiTests.SenhaEmTextoLivre_EhReconhecidaPeloRotulo
+[APROVADO] MotorPiiTests.Senha_EhSegredoDeAutenticacao_ESuprimidaPorInteiro(campo: \"api_key\")
+[APROVADO] MotorPiiTests.Senha_EhSegredoDeAutenticacao_ESuprimidaPorInteiro(campo: \"confirmacaoSenha\")
+[APROVADO] MotorPiiTests.Senha_EhSegredoDeAutenticacao_ESuprimidaPorInteiro(campo: \"password\")
+[APROVADO] MotorPiiTests.Senha_EhSegredoDeAutenticacao_ESuprimidaPorInteiro(campo: \"pin\")
+[APROVADO] MotorPiiTests.Senha_EhSegredoDeAutenticacao_ESuprimidaPorInteiro(campo: \"senha\")
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"cargo\\\":\\\"motorista\\\",\\\"terminalPrincipal\\\":\\\"Terminal\"···)
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"codigoExterno\\\":\\\"SIM-P001\\\",\\\"prefixoVeiculo\\\":\\\"SIM-\"···)
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"letreiro\\\":\\\"8000-10 Terminal Lapa\\\"}\")
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"mensagem\\\":\\\"Ônibus chega em 5 minutos na platafor\"···)
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"nome\\\":\\\"Parada Demonstração Centro\\\"}\")
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"observacao\\\":\\\"Senha de atendimento 42 chamada no \"···)
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"observadaEm\\\":\\\"2026-11-10T14:24:00-03:00\\\"}\")
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"origemRegistro\\\":\\\"operador-local\\\"}\")
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"quantidade\\\":12345678,\\\"linhaId\\\":4,\\\"paradaId\\\":1}\")
+[APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"tratamentoDeDados\\\":\\\"anonimizado\\\"}\")
+[APROVADO] MotorPiiTests.VariosDadosPessoaisNaMesmaRequisicao_SaoTodosDetectados
+[APROVADO] ProvedorLogProtegidoTests.ExcecaoComPayload_TemOTextoSanitizado
+[APROVADO] ProvedorLogProtegidoTests.MensagemComDadoContaminado_EhEscritaSanitizada
+[APROVADO] ProvedorLogProtegidoTests.MensagemLimpa_SegueSemAlteracao
+[APROVADO] ProvedorLogProtegidoTests.MesmaMensagemEmVariosProvedores_GeraUmEventoSo
+[APROVADO] ProvedorLogProtegidoTests.ProtegerSinksDeLog_EnvolveTodosOsProvedores_UmaUnicaVez
+[APROVADO] TaintAnalysisTests.ConteudoJaMascarado_NaoEhInterceptadoDeNovo
+[APROVADO] TaintAnalysisTests.ConteudoSemDadoProtegido_SaiIntacto_ESemEvento
+[APROVADO] TaintAnalysisTests.Contexto_ComecaLimpo_EFicaContaminadoComAsMarcasDaEntrada
+[APROVADO] TaintAnalysisTests.DadoPessoalEmLog_EhMascarado_EGeraEventoDeBloqueio
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: Log, sensibilidade: DadoPessoal, esperada: Mascarar)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: Log, sensibilidade: DadoPessoalSensivel, esperada: Bloquear)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: Log, sensibilidade: SegredoAutenticacao, esperada: Bloquear)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: Persistencia, sensibilidade: DadoPessoal, esperada: Bloquear)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: RespostaHttp, sensibilidade: DadoPessoal, esperada: Mascarar)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: RespostaHttp, sensibilidade: DadoPessoalSensivel, esperada: Bloquear)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: RespostaHttp, sensibilidade: SegredoAutenticacao, esperada: Bloquear)
+[APROVADO] TaintAnalysisTests.Politica_DecideConformeSaidaESensibilidade(sink: ServicoExterno, sensibilidade: DadoPessoal, esperada: Bloquear)
+[APROVADO] TaintAnalysisTests.RespostaHttpComDadoDeSaudeEscapadoPeloSerializador_TambemEhBloqueada
+[APROVADO] TaintAnalysisTests.SaidaParaServicoExterno_EhRecusada
+[APROVADO] TaintAnalysisTests.SemRequisicao_OsPadroesAindaProtegemAsSaidas
+[APROVADO] TaintAnalysisTests.SenhaEmLog_EhBloqueada_SemNenhumTrecho
+[APROVADO] TaintAnalysisTests.SomenteTaint_IgnoraPadroesQueNaoVieramDaEntrada
+[APROVADO] TaintAnalysisTests.ValorDerivadoSoComDigitos_TambemEhReconhecidoNaSaida
+[APROVADO] TaintAnalysisTests.VariosCamposContaminados_SaoTodosSubstituidos
+[APROVADO] TradutorRiscoCidadaoTests.ConteudoEnviado_NaoTemDadoPessoalDaRequisicao
+[APROVADO] TradutorRiscoCidadaoTests.DadosDoPrompt_SaoSoEnumeracoes_SemCaminhoNemMensagemTecnica
+[APROVADO] TradutorRiscoCidadaoTests.EventoIdentico_ReaproveitaAMensagemDoLlm_QuandoPermitido
+[APROVADO] TradutorRiscoCidadaoTests.EventoVerde_NaoChamaAIa
+[APROVADO] TradutorRiscoCidadaoTests.FalhaDoProvedor_UsaFallbackComOMotivo
+[APROVADO] TradutorRiscoCidadaoTests.MensagensLocais_PassamNaMesmaValidacaoDoLlm(codigo: \"PII_ANALISE_SEM_DETECCAO\", categoria: Cpf)
+[APROVADO] TradutorRiscoCidadaoTests.MensagensLocais_PassamNaMesmaValidacaoDoLlm(codigo: \"PII_DETECTADO_PROTEGIDO\", categoria: Email)
+[APROVADO] TradutorRiscoCidadaoTests.MensagensLocais_PassamNaMesmaValidacaoDoLlm(codigo: \"PII_ENTRADA_REJEITADA\", categoria: Cpf)
+[APROVADO] TradutorRiscoCidadaoTests.MensagensLocais_PassamNaMesmaValidacaoDoLlm(codigo: \"PII_TAINT_SINK_BLOCKED\", categoria: Cpf)
+[APROVADO] TradutorRiscoCidadaoTests.MensagensLocais_PassamNaMesmaValidacaoDoLlm(codigo: \"PII_TAINT_SINK_BLOCKED\", categoria: Saude)
+[APROVADO] TradutorRiscoCidadaoTests.MensagensLocais_PassamNaMesmaValidacaoDoLlm(codigo: \"PII_TAINT_SINK_BLOCKED\", categoria: Senha)
+[APROVADO] TradutorRiscoCidadaoTests.PromptQueLevariaValorMarcado_EhBloqueadoAntesDoEnvio
+[APROVADO] TradutorRiscoCidadaoTests.ProvedorDesabilitado_UsaFallbackIdentificado
+[APROVADO] TradutorRiscoCidadaoTests.RespostaExcessivamenteLonga_EhDescartada
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"AfirmaVazamento\", resposta: \"Seus dados vazaram, mas o sistema já está cuidando\"···)
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"Alarmismo\", resposta: \"Perigo! Houve um ataque ao sistema e você deve agi\"···)
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"ContemDadoPessoal\", resposta: \"O CPF 111.444.777-35 foi protegido pelo sistema de\"···)
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"IdiomaInesperado\", resposta: \"Personal data transfer blocked by policy.\")
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"PromessaAbsoluta\", resposta: \"Seus dados estão 100% seguros e nunca serão acessa\"···)
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"RespostaLonga\", resposta: \"O sistema bloqueou a operação. Seus dados continua\"···)
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"RespostaVazia\", resposta: \"   \")
+[APROVADO] TradutorRiscoCidadaoTests.RespostaInadequada_EhDescartada_EUsaOFallback(motivo: \"TermoTecnico\", resposta: \"O middleware bloqueou o sink de log com o seu CPF \"···)
+[APROVADO] TradutorRiscoCidadaoTests.RespostaValida_EhUsada_ComOrigemLlm
+[APROVADO] TradutorRiscoCidadaoTests.SemChave_UsaFallbackSemChamarOProvedor
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"000.000.000-00\", esperado: False)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"111.111.111-11\", esperado: False)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"111.444.777-35\", esperado: True)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"11144477735\", esperado: True)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"123.456.789-00\", esperado: False)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"123.456.789-09\", esperado: True)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"123456789012\", esperado: False)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"1234567890\", esperado: False)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: \"abc.def.ghi-jk\", esperado: False)
+[APROVADO] ValidadorCpfTests.Valido_ConfereDigitosVerificadores(cpf: null, esperado: False)
+[APROVADO] ValidadorMensagemCidadaoTests.AfirmarVazamento_SoEhProibidoQuandoHouveBloqueio
+[APROVADO] ValidadorMensagemCidadaoTests.MensagemClaraEmPortugues_EhAprovada(mensagem: \"Identificamos uma tentativa de envio de informação\"···)
+[APROVADO] ValidadorMensagemCidadaoTests.MensagemClaraEmPortugues_EhAprovada(mensagem: \"Tentaram acessar seu documento de saúde, mas nosso\"···)
+[APROVADO] ValidadorMensagemCidadaoTests.Normalizacao_RemoveAspasMarcacaoEQuebrasDeLinha

@@ -1,0 +1,64 @@
+
+=== Reinício da demonstração ===
+HTTP 204
+
+=== Cenário 1 · consulta segura (GET /api/v1/paradas?codigoExterno=SIM-P001) ===
+HTTP 200 · parada: Parada Demonstração Centro
+Risco: Verde
+
+=== Cenário 2 · JSON fictício com dados pessoais (POST /api/v1/seguranca/analises) ===
+
+categoria caminho sensibilidade       regra                 acao    
+--------- ------- -------------       -----                 ----    
+Cpf       $.cpf   DadoPessoal         campo-cpf+dv-valido   Mascarar
+Senha     $.senha SegredoAutenticacao campo-senha           Suprimir
+Saude     $.saude DadoPessoalSensivel campo-saude-estrutura Suprimir
+Email     $.email DadoPessoal         campo-email           Mascarar
+
+
+
+Corpo sanitizado: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
+Risco: Amarelo
+
+=== Cenário 3 · tentativa controlada de saída insegura ===
+HTTP 200 · X-PontoVoz-Protecao: resposta-sanitizada; evento=EVT-C22E6911759C
+Serviço externo: bloqueado (evento EVT-54853147B33C)
+Cadastro devolvido: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
+Exceção com o cadastro na mensagem: HTTP 500 · ErroInterno · Ocorreu um erro inesperado. Tente novamente mais tarde.
+Rota real com CPF em origemRegistro: HTTP 422 · DadoPessoalBloqueado
+
+=== Cenário 4 · explicação do evento de maior risco ===
+Mensagem ao cidadão: Identificamos uma tentativa de envio de informação pessoal para uma área não autorizada. O sistema bloqueou essa operação para ajudar a proteger seus dados.
+Origem: Fallback ChaveNaoConfigurada · chamada externa realizada: False
+Dados enviados ao LLM: {"codigoEvento":"PII_TAINT_SINK_BLOCKED","categoriasGenericas":["CPF"],"destinoDaTentativa":"o armazenamento permanente do sistema","acaoExecutada":"o envio foi bloqueado e a informação foi substituída por um aviso de proteção","resultado":"a informação original não chegou ao destino","nivelRisco":"vermelho","publico":"cidadão leigo de 60 anos, usuário de ônibus em São Paulo"}
+
+=== Estado final do painel ===
+Risco Vermelho: Tentativa de saída insegura bloqueada
+
+
+eventosAnalisados          : 6
+dadosPessoaisIdentificados : 13
+tentativasBloqueadas       : 5
+eventosSemRisco            : 2
+entradasRejeitadas         : 0
+
+
+
+
+
+Horário  codigo                   nivelRisco tipoDestino    decisao 
+-------  ------                   ---------- -----------    ------- 
+20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   Persistencia   Bloquear
+20:30:28 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+20:30:28 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
+20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
+20:30:28 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   RespostaHttp   Bloquear
+20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   ServicoExterno Bloquear
+20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
+20:30:28 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+20:30:27 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+20:30:27 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
+
+
+

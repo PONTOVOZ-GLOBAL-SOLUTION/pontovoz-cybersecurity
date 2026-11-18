@@ -1,0 +1,363 @@
+{
+  "modulo": "PontoVoz · Cybersecurity",
+  "risco": {
+    "nivel": "Vermelho",
+    "titulo": "Tentativa de saída insegura bloqueada",
+    "descricao": "5 tentativas de enviar dado pessoal para destino não autorizado nos últimos 30 minutos. A política de proteção interceptou o envio: o valor original não chegou ao destino.",
+    "mensagemCidadao": "Identificamos uma tentativa de envio de informação pessoal para uma área não autorizada. O sistema bloqueou essa operação para ajudar a proteger seus dados.",
+    "origemMensagem": "Fallback",
+    "eventoReferenciaId": "EVT-942655DB45DC",
+    "janelaMinutos": 30
+  },
+  "indicadores": {
+    "eventosAnalisados": 7,
+    "dadosPessoaisIdentificados": 16,
+    "tentativasBloqueadas": 5,
+    "eventosSemRisco": 3,
+    "entradasRejeitadas": 0
+  },
+  "eventos": [
+    {
+      "id": "EVT-942655DB45DC",
+      "ocorridoEm": "2026-11-18T23:30:41.1669646+00:00",
+      "codigo": "PII_TAINT_SINK_BLOCKED",
+      "correlacaoId": "0HNQ5PFH6E17R:00000014",
+      "fonte": "POST /api/v1/admin/observacoes-passagem",
+      "categorias": [
+        "Cpf"
+      ],
+      "caminhos": [
+        "$.origemRegistro"
+      ],
+      "tipoDestino": "Persistencia",
+      "destino": "persistencia:PassagemRegistroManual._origemRegistro",
+      "decisao": "Bloquear",
+      "resultado": "O valor original foi substituído por um marcador de bloqueio; nenhum trecho do conteúdo protegido chegou ao destino.",
+      "nivelRisco": "Vermelho",
+      "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf a caminho de Persistencia (persistencia:PassagemRegistroManual._origemRegistro); política aplicada: Bloquear.",
+      "quantidadeDeteccoes": 1,
+      "mensagemCidadao": "Identificamos uma tentativa de envio de informação pessoal para uma área não autorizada. O sistema bloqueou essa operação para ajudar a proteger seus dados.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:43.5140322+00:00"
+    },
+    {
+      "id": "EVT-98B523681366",
+      "ocorridoEm": "2026-11-18T23:30:41.1532498+00:00",
+      "codigo": "PII_DETECTADO_PROTEGIDO",
+      "correlacaoId": "0HNQ5PFH6E17R:00000014",
+      "fonte": "POST /api/v1/admin/observacoes-passagem",
+      "categorias": [
+        "Cpf"
+      ],
+      "caminhos": [
+        "$.origemRegistro"
+      ],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Mascarar",
+      "resultado": "Valores classificados e marcados; todas as saídas desta requisição passam pela política de proteção.",
+      "nivelRisco": "Amarelo",
+      "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 1 marca(s) em corpo JSON — T1 Cpf/DadoPessoal em $.origemRegistro (texto-11-digitos+dv)",
+      "quantidadeDeteccoes": 1,
+      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:41.154161+00:00"
+    },
+    {
+      "id": "EVT-9CC515D2A809",
+      "ocorridoEm": "2026-11-18T23:30:41.1329845+00:00",
+      "codigo": "PII_ANALISE_SEM_DETECCAO",
+      "correlacaoId": "0HNQ5PFH6E17R:00000012",
+      "fonte": "GET /api/v1/paradas",
+      "categorias": [],
+      "caminhos": [],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Permitir",
+      "resultado": "Requisição seguiu normalmente.",
+      "nivelRisco": "Verde",
+      "mensagemTecnica": "PII_ANALISE_SEM_DETECCAO: query string analisado(s), nenhuma informação pessoal encontrada.",
+      "quantidadeDeteccoes": 0,
+      "mensagemCidadao": "A consulta foi verificada e não continha informações pessoais. Nenhuma ação é necessária.",
+      "origemMensagem": "Padrao",
+      "motivoFallback": null,
+      "modeloLlm": null,
+      "explicadoEm": null
+    },
+    {
+      "id": "EVT-55DAF02EDB60",
+      "ocorridoEm": "2026-11-18T23:30:40.3054571+00:00",
+      "codigo": "PII_TAINT_SINK_BLOCKED",
+      "correlacaoId": "0HNQ5PFH6E17R:0000000F",
+      "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "categorias": [
+        "Cpf",
+        "Email",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.cpf",
+        "$.email",
+        "$.saude.condicao",
+        "$.senha"
+      ],
+      "tipoDestino": "Log",
+      "destino": "log:PontoVoz.Api.Middleware.TratadorExcecoes",
+      "decisao": "Bloquear",
+      "resultado": "O valor original foi substituído por um marcador de bloqueio; nenhum trecho do conteúdo protegido chegou ao destino.",
+      "nivelRisco": "Vermelho",
+      "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de Log (log:PontoVoz.Api.Middleware.TratadorExcecoes); política aplicada: Bloquear.",
+      "quantidadeDeteccoes": 4,
+      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:40.3063543+00:00"
+    },
+    {
+      "id": "EVT-5FC07BB136EB",
+      "ocorridoEm": "2026-11-18T23:30:40.2695465+00:00",
+      "codigo": "PII_DETECTADO_PROTEGIDO",
+      "correlacaoId": "0HNQ5PFH6E17R:0000000F",
+      "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "categorias": [
+        "Cpf",
+        "Email",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.cpf",
+        "$.senha",
+        "$.saude",
+        "$.email"
+      ],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Mascarar",
+      "resultado": "Valores classificados e marcados; todas as saídas desta requisição passam pela política de proteção.",
+      "nivelRisco": "Amarelo",
+      "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 4 marca(s) em query string + corpo JSON — T1 Cpf/DadoPessoal em $.cpf (campo-cpf+dv-valido); T2 Senha/SegredoAutenticacao em $.senha (campo-senha); T3 Saude/DadoPessoalSensivel em $.saude (campo-saude-estrutura); T4 Email/DadoPessoal em $.email (campo-email)",
+      "quantidadeDeteccoes": 4,
+      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:40.3023784+00:00"
+    },
+    {
+      "id": "EVT-1B937169BE5B",
+      "ocorridoEm": "2026-11-18T23:30:37.8481433+00:00",
+      "codigo": "PII_TAINT_SINK_BLOCKED",
+      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "categorias": [
+        "Cpf",
+        "Email",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.cpf",
+        "$.email",
+        "$.saude.condicao",
+        "$.senha"
+      ],
+      "tipoDestino": "RespostaHttp",
+      "destino": "resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "decisao": "Bloquear",
+      "resultado": "O valor original foi substituído por um marcador de bloqueio; nenhum trecho do conteúdo protegido chegou ao destino.",
+      "nivelRisco": "Vermelho",
+      "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de RespostaHttp (resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado); política aplicada: Bloquear.",
+      "quantidadeDeteccoes": 4,
+      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:37.8495126+00:00"
+    },
+    {
+      "id": "EVT-26235074AC05",
+      "ocorridoEm": "2026-11-18T23:30:37.8462814+00:00",
+      "codigo": "PII_TAINT_SINK_BLOCKED",
+      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "categorias": [
+        "Cpf",
+        "Email",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.cpf",
+        "$.email",
+        "$.saude.condicao",
+        "$.senha"
+      ],
+      "tipoDestino": "ServicoExterno",
+      "destino": "servico-externo:parceiro-ficticio",
+      "decisao": "Bloquear",
+      "resultado": "O valor original foi substituído por um marcador de bloqueio; nenhum trecho do conteúdo protegido chegou ao destino.",
+      "nivelRisco": "Vermelho",
+      "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de ServicoExterno (servico-externo:parceiro-ficticio); política aplicada: Bloquear.",
+      "quantidadeDeteccoes": 4,
+      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:37.8473381+00:00"
+    },
+    {
+      "id": "EVT-007C17BD430A",
+      "ocorridoEm": "2026-11-18T23:30:37.8427866+00:00",
+      "codigo": "PII_TAINT_SINK_BLOCKED",
+      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "categorias": [
+        "Cpf",
+        "Email",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.cpf",
+        "$.email",
+        "$.saude.condicao",
+        "$.senha"
+      ],
+      "tipoDestino": "Log",
+      "destino": "log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController",
+      "decisao": "Bloquear",
+      "resultado": "O valor original foi substituído por um marcador de bloqueio; nenhum trecho do conteúdo protegido chegou ao destino.",
+      "nivelRisco": "Vermelho",
+      "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de Log (log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController); política aplicada: Bloquear.",
+      "quantidadeDeteccoes": 4,
+      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:37.8451921+00:00"
+    },
+    {
+      "id": "EVT-A05360F76BED",
+      "ocorridoEm": "2026-11-18T23:30:37.8397831+00:00",
+      "codigo": "PII_DETECTADO_PROTEGIDO",
+      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
+      "categorias": [
+        "Cpf",
+        "Email",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.cpf",
+        "$.senha",
+        "$.saude",
+        "$.email"
+      ],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Mascarar",
+      "resultado": "Valores classificados e marcados; todas as saídas desta requisição passam pela política de proteção.",
+      "nivelRisco": "Amarelo",
+      "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 4 marca(s) em query string + corpo JSON — T1 Cpf/DadoPessoal em $.cpf (campo-cpf+dv-valido); T2 Senha/SegredoAutenticacao em $.senha (campo-senha); T3 Saude/DadoPessoalSensivel em $.saude (campo-saude-estrutura); T4 Email/DadoPessoal em $.email (campo-email)",
+      "quantidadeDeteccoes": 4,
+      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:37.8411545+00:00"
+    },
+    {
+      "id": "EVT-5DC9D1BB1D9B",
+      "ocorridoEm": "2026-11-18T23:30:36.0745381+00:00",
+      "codigo": "PII_DETECTADO_PROTEGIDO",
+      "correlacaoId": "0HNQ5PFH6E17R:00000009",
+      "fonte": "POST /api/v1/seguranca/analises",
+      "categorias": [
+        "Cpf",
+        "Rg",
+        "Email",
+        "Telefone",
+        "Saude",
+        "Senha"
+      ],
+      "caminhos": [
+        "$.passageiro.cpf",
+        "$.passageiro.rg",
+        "$.passageiro.contatos[0].valor",
+        "$.passageiro.contatos[1].valor",
+        "$.acessibilidade.laudo",
+        "$.senha",
+        "$.observacao"
+      ],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Mascarar",
+      "resultado": "Valores classificados e marcados; todas as saídas desta requisição passam pela política de proteção.",
+      "nivelRisco": "Amarelo",
+      "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 7 marca(s) em corpo JSON — T1 Cpf/DadoPessoal em $.passageiro.cpf (campo-cpf+dv-valido); T2 Rg/DadoPessoal em $.passageiro.rg (campo-rg); T3 Email/DadoPessoal em $.passageiro.contatos[0].valor (texto-email); T4 Telefone/DadoPessoal em $.passageiro.contatos[1].valor (texto-telefone-formatado); T5 Saude/DadoPessoalSensivel em $.acessibilidade.laudo (campo-saude); T6 Senha/SegredoAutenticacao em $.senha (campo-senha); T7 Cpf/DadoPessoal em $.observacao (texto-cpf-formatado+dv)",
+      "quantidadeDeteccoes": 7,
+      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
+      "origemMensagem": "Fallback",
+      "motivoFallback": "ChaveNaoConfigurada",
+      "modeloLlm": null,
+      "explicadoEm": "2026-11-18T23:30:36.0778796+00:00"
+    },
+    {
+      "id": "EVT-6D9C9ABF9704",
+      "ocorridoEm": "2026-11-18T23:30:35.9994414+00:00",
+      "codigo": "PII_ANALISE_SEM_DETECCAO",
+      "correlacaoId": "0HNQ5PFH6E17S:00000001",
+      "fonte": "GET /api/v1/paradas",
+      "categorias": [],
+      "caminhos": [],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Permitir",
+      "resultado": "Requisição seguiu normalmente.",
+      "nivelRisco": "Verde",
+      "mensagemTecnica": "PII_ANALISE_SEM_DETECCAO: query string analisado(s), nenhuma informação pessoal encontrada.",
+      "quantidadeDeteccoes": 0,
+      "mensagemCidadao": "A consulta foi verificada e não continha informações pessoais. Nenhuma ação é necessária.",
+      "origemMensagem": "Padrao",
+      "motivoFallback": null,
+      "modeloLlm": null,
+      "explicadoEm": null
+    },
+    {
+      "id": "EVT-8459AD5ABCB7",
+      "ocorridoEm": "2026-11-18T23:30:34.793525+00:00",
+      "codigo": "PII_ANALISE_SEM_DETECCAO",
+      "correlacaoId": "0HNQ5PFH6E17R:00000006",
+      "fonte": "GET /api/v1/paradas",
+      "categorias": [],
+      "caminhos": [],
+      "tipoDestino": null,
+      "destino": null,
+      "decisao": "Permitir",
+      "resultado": "Requisição seguiu normalmente.",
+      "nivelRisco": "Verde",
+      "mensagemTecnica": "PII_ANALISE_SEM_DETECCAO: query string analisado(s), nenhuma informação pessoal encontrada.",
+      "quantidadeDeteccoes": 0,
+      "mensagemCidadao": "A consulta foi verificada e não continha informações pessoais. Nenhuma ação é necessária.",
+      "origemMensagem": "Padrao",
+      "motivoFallback": null,
+      "modeloLlm": null,
+      "explicadoEm": null
+    }
+  ],
+  "ia": {
+    "provedor": "Gemini",
+    "modelo": "gemini-2.5-flash",
+    "chaveConfigurada": false
+  },
+  "demonstracaoHabilitada": true,
+  "geradoEm": "2026-11-18T23:30:48.9452534+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "passageiro": {
+    "nome": "Passageiro Fictício",
+    "cpf": "123.456.789-09",
+    "rg": "12.345.678-X",
+    "contatos": [
+      {
+        "tipo": "e-mail",
+        "valor": "passageiro.ficticio@exemplo.com.br"
+      },
+      {
+        "tipo": "celular",
+        "valor": "(11) 91234-5678"
+      }
+    ]
+  },
+  "acessibilidade": {
+    "laudo": "CID-10 H54 — baixa visão (dado fictício)"
+  },
+  "senha": "Senha@Teste123",
+  "observacao": "Meu documento é 111.444.777-35, avisar no ponto SIM-P001"
+}

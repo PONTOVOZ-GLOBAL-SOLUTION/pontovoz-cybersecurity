@@ -1,4 +1,5 @@
 using PontoVoz.Api.Application;
+using PontoVoz.Api.Cybersecurity;
 using PontoVoz.Api.Documentacao;
 using PontoVoz.Api.Infrastructure.Persistence;
 using PontoVoz.Api.Infrastructure.Providers;
@@ -19,10 +20,17 @@ builder.Services.AddProvedoresPrevisaoPontoVoz(builder.Configuration);
 builder.Services.AddAplicacaoPontoVoz();
 builder.Services.AddSegurancaAdministrativa();
 
+// Módulo de Cybersecurity: por último, para proteger também os provedores de log já registrados.
+builder.Services.AddCybersecurityPontoVoz(builder.Configuration);
+
 var app = builder.Build();
 
 // Em Development (Banco:AplicarMigracoesAoIniciar), cria ou atualiza o SQLite antes de atender.
 await app.AplicarMigracoesEmDesenvolvimentoAsync();
+
+// Interceptador de dados pessoais (source do Taint Analysis e sink de resposta). Fica antes do
+// tratamento de erros para que também as respostas de erro passem pela política de proteção.
+app.UseInterceptadorDadosPessoais();
 
 // Erros: exceções viram ProblemDetails (TratadorExcecoes) e status sem corpo, como o 404 de
 // uma rota inexistente, também recebem um ProblemDetails.
@@ -46,6 +54,10 @@ else
     // já que o certificado de desenvolvimento pode não estar confiável em todas as máquinas.
     app.UseHttpsRedirection();
 }
+
+// Painel Risco Cidadão (arquivos estáticos em wwwroot/seguranca).
+app.UseStaticFiles();
+app.MapGet("/seguranca", () => Results.Redirect("/seguranca/index.html")).ExcludeFromDescription();
 
 app.UseCors(WebApiExtensions.PoliticaCors);
 app.MapControllers();
