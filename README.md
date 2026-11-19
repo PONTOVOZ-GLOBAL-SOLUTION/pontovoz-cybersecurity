@@ -8,7 +8,7 @@ Partimos do backend C#/.NET 10 do PontoVoz, que já disponibiliza as consultas d
 acrescentamos uma camada de segurança com as quatro partes pedidas na disciplina: **motor de
 parsing PII**, **Taint Analysis**, **tradução de alertas por IA** e **Dashboard Risco Cidadão**.
 
-A documentação acadêmica (PDF) e o vídeo da demonstração são entregues separadamente, como pedido
+A documentação acadêmica (PDF) e o vídeo narrado da demonstração são entregues separadamente, como pedido
 
 ## O PontoVoz e por que ele precisa de proteção de dados
 
