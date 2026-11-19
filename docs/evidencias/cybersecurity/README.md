@@ -1,7 +1,9 @@
 # Evidências — Cybersecurity
 
-Capturas e saídas geradas em 18/11/2026 com a API em execução local (Development, provedor de LLM
-sem chave configurada). Todos os dados enviados são fictícios.
+Capturas e saídas que geramos em 18/11/2026 com a API em execução local (Development, provedor de
+LLM sem chave configurada), na versão publicada após a auditoria final. Todos os dados enviados
+são fictícios. O vídeo da demonstração é entregue separadamente
+(`PontoVoz_Cybersecurity_Demonstracao.mp4`).
 
 ## Parsing PII (3,0)
 
@@ -21,10 +23,11 @@ sem chave configurada). Todos os dados enviados são fictícios.
 | Arquivo | Conteúdo |
 |---|---|
 | [codigo/07-interceptador-source.png](codigo/07-interceptador-source.png) | Source: interceptador da entrada |
+| [codigo/07b-interceptador-multipart.png](codigo/07b-interceptador-multipart.png) | Campos de texto de `multipart/form-data` |
 | [codigo/08-interceptador-sink-resposta.png](codigo/08-interceptador-sink-resposta.png) | Sink de resposta HTTP |
 | [codigo/09-politica-sinks.png](codigo/09-politica-sinks.png) | Política explícita por saída |
 | [codigo/10-guarda-sinks.png](codigo/10-guarda-sinks.png) | Verificação antes das saídas |
-| [codigo/11-sink-log.png](codigo/11-sink-log.png) · [12-sink-persistencia.png](codigo/12-sink-persistencia.png) | Sinks de log e de banco |
+| [codigo/11-sink-log.png](codigo/11-sink-log.png) · [11b-sink-log-escopos.png](codigo/11b-sink-log-escopos.png) · [12-sink-persistencia.png](codigo/12-sink-persistencia.png) | Sinks de log (mensagens e escopos) e de banco |
 | [codigo/13-demonstracao-codigo-inseguro.png](codigo/13-demonstracao-codigo-inseguro.png) | Código inseguro de propósito (tentativa controlada) |
 | [codigo/20-pipeline-program.png](codigo/20-pipeline-program.png) | Posição do interceptador no pipeline |
 | [telas/06-cenario3-resposta-sanitizada.png](telas/06-cenario3-resposta-sanitizada.png) | Resposta que chegou ao cliente |
@@ -44,8 +47,8 @@ sem chave configurada). Todos os dados enviados são fictícios.
 | [codigo/18-validador-mensagem.png](codigo/18-validador-mensagem.png) | Validação da resposta do LLM |
 | [telas/12-cenario4-explicacao-ia.png](telas/12-cenario4-explicacao-ia.png) | Explicação exibida, origem `Fallback · ChaveNaoConfigurada` e dados que seriam enviados |
 
-Não houve chamada real a um provedor de LLM: nenhuma chave estava configurada. A tela do cenário 4
-mostra o fallback identificado, não uma resposta de IA.
+Não houve chamada real a um provedor de LLM, porque não tínhamos uma chave configurada. A tela do
+cenário 4 mostra o fallback identificado, não uma resposta de IA.
 
 ## Dashboard Risco Cidadão (2,0)
 

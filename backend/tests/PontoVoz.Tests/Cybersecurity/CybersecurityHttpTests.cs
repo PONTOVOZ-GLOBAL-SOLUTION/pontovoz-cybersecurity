@@ -52,6 +52,9 @@ public sealed class CybersecurityHttpTests
 
                 // O provedor de teste entra depois do Program.cs; recebe a mesma proteção dos demais.
                 services.ProtegerSinksDeLog();
+
+                // Como o Kestrel local, o servidor em memória passa a informar o endereço de loopback.
+                services.AddSingleton<Microsoft.AspNetCore.Hosting.IStartupFilter>(new EnderecoRemotoSimulado("127.0.0.1", null));
             });
         }, chaveAdministrativa: chave, ambiente: ambiente);
         return new Ambiente(api, logs);

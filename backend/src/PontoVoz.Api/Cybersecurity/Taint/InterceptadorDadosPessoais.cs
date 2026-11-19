@@ -2,6 +2,7 @@ using System.Text;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.Options;
 
 using PontoVoz.Api.Cybersecurity.Auditoria;
@@ -33,6 +34,7 @@ public sealed class InterceptadorDadosPessoais(
     public const string FonteQuery = "query string";
     public const string FonteFormulario = "formulário";
     public const string FonteTexto = "corpo em texto";
+    public const string FonteMultipart = "formulário multipart";
     public const string RotaModulo = "/api/v1/seguranca";
 
     private readonly OpcoesCybersecurity _opcoes = opcoes.Value;
@@ -104,6 +106,7 @@ public sealed class InterceptadorDadosPessoais(
         (ResultadoAnalisePii analise, string fonte) = TipoCorpo(contexto.Request) switch
         {
             TipoConteudo.Json => (motor.AnalisarJson(corpo), FonteCorpoJson),
+            TipoConteudo.Multipart => (await AnalisarMultipartAsync(contexto.Request, corpo), FonteMultipart),
             TipoConteudo.Formulario => (motor.AnalisarCampos(QueryHelpers.ParseQuery(corpo).Select(par => KeyValuePair.Create(par.Key, (string?)par.Value.ToString()))), FonteFormulario),
             _ => (motor.AnalisarTexto(corpo), FonteTexto),
         };
@@ -239,6 +242,47 @@ public sealed class InterceptadorDadosPessoais(
         return lidos > limite ? null : Encoding.UTF8.GetString(bytes, 0, lidos);
     }
 
+    /// <summary>
+    /// Campos de texto de um <c>multipart/form-data</c>, analisados pelo nome como um formulário comum.
+    /// Partes com arquivo (<c>filename</c>) não são lidas como campos: o PontoVoz não recebe arquivos.
+    /// Um corpo multipart inválido é varrido como texto.
+    /// </summary>
+    private async Task<ResultadoAnalisePii> AnalisarMultipartAsync(HttpRequest requisicao, string corpo)
+    {
+        string? limite = MediaTypeHeaderValue.TryParse(requisicao.ContentType, out MediaTypeHeaderValue? tipo)
+            ? HeaderUtilities.RemoveQuotes(tipo.Boundary).Value
+            : null;
+        if (string.IsNullOrEmpty(limite))
+        {
+            return motor.AnalisarTexto(corpo);
+        }
+
+        var campos = new List<KeyValuePair<string, string?>>();
+        try
+        {
+            using var conteudo = new MemoryStream(Encoding.UTF8.GetBytes(corpo));
+            var leitor = new MultipartReader(limite, conteudo);
+            while (await leitor.ReadNextSectionAsync(requisicao.HttpContext.RequestAborted) is { } secao)
+            {
+                if (!ContentDispositionHeaderValue.TryParse(secao.ContentDisposition, out ContentDispositionHeaderValue? disposicao)
+                    || disposicao.IsFileDisposition())
+                {
+                    continue;
+                }
+
+                using var texto = new StreamReader(secao.Body, Encoding.UTF8);
+                string nome = HeaderUtilities.RemoveQuotes(disposicao.Name).Value ?? string.Empty;
+                campos.Add(KeyValuePair.Create(nome, (string?)await texto.ReadToEndAsync(requisicao.HttpContext.RequestAborted)));
+            }
+        }
+        catch (IOException)
+        {
+            return motor.AnalisarTexto(corpo);
+        }
+
+        return motor.AnalisarCampos(campos);
+    }
+
     private static TipoConteudo TipoCorpo(HttpRequest requisicao)
     {
         string tipo = requisicao.ContentType ?? string.Empty;
@@ -247,16 +291,24 @@ public sealed class InterceptadorDadosPessoais(
             return TipoConteudo.Json;
         }
 
+        if (tipo.StartsWith("multipart/form-data", StringComparison.OrdinalIgnoreCase))
+        {
+            return TipoConteudo.Multipart;
+        }
+
         return tipo.Contains("x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase) ? TipoConteudo.Formulario : TipoConteudo.Texto;
     }
 
+    // Sem Content-Type o corpo também é verificado; só conteúdos de outro tipo (binários) passam direto.
     private static bool Textual(string? tipo) =>
-        tipo is not null && (tipo.Contains("json", StringComparison.OrdinalIgnoreCase) || tipo.StartsWith("text/", StringComparison.OrdinalIgnoreCase));
+        tipo is null || tipo.Contains("json", StringComparison.OrdinalIgnoreCase) || tipo.StartsWith("text/", StringComparison.OrdinalIgnoreCase)
+        || tipo.Contains("xml", StringComparison.OrdinalIgnoreCase) || tipo.Contains("x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase);
 
     private enum TipoConteudo
     {
         Json,
         Formulario,
+        Multipart,
         Texto,
     }
 

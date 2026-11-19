@@ -20,11 +20,43 @@ public sealed class ProvedorLogProtegido(ILoggerProvider interno, IServiceProvid
 
     public ILogger CreateLogger(string categoryName) => new LoggerProtegido(interno.CreateLogger(categoryName), categoryName, this);
 
+    /// <summary>
+    /// Os escopos (<c>BeginScope</c>) ficam num provedor externo mantido pela fábrica de logs e são
+    /// lidos por cada provedor na hora de escrever. O acesso de leitura é envolvido para que cada
+    /// escopo passe pela mesma verificação das mensagens antes de chegar ao destino.
+    /// </summary>
     public void SetScopeProvider(IExternalScopeProvider scopeProvider)
     {
         if (interno is ISupportExternalScope comEscopo)
         {
-            comEscopo.SetScopeProvider(scopeProvider);
+            comEscopo.SetScopeProvider(scopeProvider is EscoposProtegidos ? scopeProvider : new EscoposProtegidos(scopeProvider, this));
+        }
+    }
+
+    /// <summary>Versão sanitizada do escopo, ou <c>null</c> quando ele não contém dado protegido.</summary>
+    internal string? EscopoSanitizado(object? estado)
+    {
+        if (estado is null || LoggerProtegido.Verificando)
+        {
+            return null;
+        }
+
+        string texto = estado.ToString() ?? string.Empty;
+        if (estado is IEnumerable<KeyValuePair<string, object?>> pares)
+        {
+            // Escopos estruturados são verificados também pelos valores, não só pelo ToString().
+            texto += " " + string.Join(" ", pares.Select(par => $"{par.Key}={par.Value}"));
+        }
+
+        LoggerProtegido.Verificando = true;
+        try
+        {
+            ResultadoProtecaoSink resultado = Guarda.Proteger(TipoSink.Log, texto, $"log-escopo:{estado.GetType().Name}");
+            return resultado.Interceptado ? resultado.Conteudo : null;
+        }
+        finally
+        {
+            LoggerProtegido.Verificando = false;
         }
     }
 
@@ -52,8 +84,15 @@ public sealed class ProvedorLogProtegido(ILoggerProvider interno, IServiceProvid
         [ThreadStatic]
         private static string? t_ultimoContexto;
 
+        internal static bool Verificando
+        {
+            get => t_verificando;
+            set => t_verificando = value;
+        }
+
         public IDisposable? BeginScope<TState>(TState state)
-            where TState : notnull => interno.BeginScope(state);
+            where TState : notnull =>
+            provedor.EscopoSanitizado(state) is { } sanitizado ? interno.BeginScope(sanitizado) : interno.BeginScope(state);
 
         public bool IsEnabled(LogLevel logLevel) => interno.IsEnabled(logLevel);
 
@@ -106,6 +145,15 @@ public sealed class ProvedorLogProtegido(ILoggerProvider interno, IServiceProvid
             interno.Log(logLevel, eventId, resultado.Conteudo, null, static (texto, _) => texto);
         }
     }
+}
+
+/// <summary>Provedor externo de escopos que entrega aos provedores de log só escopos verificados.</summary>
+internal sealed class EscoposProtegidos(IExternalScopeProvider interno, ProvedorLogProtegido provedor) : IExternalScopeProvider
+{
+    public void ForEachScope<TState>(Action<object?, TState> callback, TState state) =>
+        interno.ForEachScope((escopo, estado) => callback(provedor.EscopoSanitizado(escopo) ?? escopo, estado), state);
+
+    public IDisposable Push(object? state) => interno.Push(state);
 }
 
 public static class LogProtegidoExtensions

@@ -1,5 +1,5 @@
 {
-  "exportadoEm": "2026-11-18T23:30:48.9143451+00:00",
+  "exportadoEm": "2026-11-19T00:33:08.1421746+00:00",
   "indicadores": {
     "eventosAnalisados": 7,
     "dadosPessoaisIdentificados": 16,
@@ -11,15 +11,15 @@
     "nivel": "Vermelho",
     "titulo": "Tentativa de saída insegura bloqueada",
     "descricao": "5 tentativas de enviar dado pessoal para destino não autorizado nos últimos 30 minutos. A política de proteção interceptou o envio: o valor original não chegou ao destino.",
-    "eventoReferenciaId": "EVT-942655DB45DC",
+    "eventoReferenciaId": "EVT-BEF28C6E8160",
     "janelaMinutos": 30
   },
   "eventos": [
     {
-      "id": "EVT-942655DB45DC",
-      "ocorridoEm": "2026-11-18T23:30:41.1669646+00:00",
+      "id": "EVT-BEF28C6E8160",
+      "ocorridoEm": "2026-11-19T00:33:01.4126297+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5PFH6E17R:00000014",
+      "correlacaoId": "0HNQ5QII1GCJ6:00000012",
       "fonte": "POST /api/v1/admin/observacoes-passagem",
       "categorias": [
         "Cpf"
@@ -38,13 +38,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:43.5140322+00:00"
+      "explicadoEm": "2026-11-19T00:33:03.6917563+00:00"
     },
     {
-      "id": "EVT-98B523681366",
-      "ocorridoEm": "2026-11-18T23:30:41.1532498+00:00",
+      "id": "EVT-73816F847B12",
+      "ocorridoEm": "2026-11-19T00:33:01.4061323+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5PFH6E17R:00000014",
+      "correlacaoId": "0HNQ5QII1GCJ6:00000012",
       "fonte": "POST /api/v1/admin/observacoes-passagem",
       "categorias": [
         "Cpf"
@@ -63,13 +63,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:41.154161+00:00"
+      "explicadoEm": "2026-11-19T00:33:01.4070318+00:00"
     },
     {
-      "id": "EVT-9CC515D2A809",
-      "ocorridoEm": "2026-11-18T23:30:41.1329845+00:00",
+      "id": "EVT-BF5D7095AA26",
+      "ocorridoEm": "2026-11-19T00:33:01.3874141+00:00",
       "codigo": "PII_ANALISE_SEM_DETECCAO",
-      "correlacaoId": "0HNQ5PFH6E17R:00000012",
+      "correlacaoId": "0HNQ5QII1GCJ6:00000010",
       "fonte": "GET /api/v1/paradas",
       "categorias": [],
       "caminhos": [],
@@ -87,10 +87,10 @@
       "explicadoEm": null
     },
     {
-      "id": "EVT-55DAF02EDB60",
-      "ocorridoEm": "2026-11-18T23:30:40.3054571+00:00",
+      "id": "EVT-E85999E999C8",
+      "ocorridoEm": "2026-11-19T00:33:00.6148736+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5PFH6E17R:0000000F",
+      "correlacaoId": "0HNQ5QII1GCJ6:0000000E",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -115,13 +115,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:40.3063543+00:00"
+      "explicadoEm": "2026-11-19T00:33:00.616382+00:00"
     },
     {
-      "id": "EVT-5FC07BB136EB",
-      "ocorridoEm": "2026-11-18T23:30:40.2695465+00:00",
+      "id": "EVT-FE8D14A90F4A",
+      "ocorridoEm": "2026-11-19T00:33:00.6071803+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5PFH6E17R:0000000F",
+      "correlacaoId": "0HNQ5QII1GCJ6:0000000E",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -146,13 +146,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:40.3023784+00:00"
+      "explicadoEm": "2026-11-19T00:33:00.6094367+00:00"
     },
     {
-      "id": "EVT-1B937169BE5B",
-      "ocorridoEm": "2026-11-18T23:30:37.8481433+00:00",
+      "id": "EVT-197EC5F49955",
+      "ocorridoEm": "2026-11-19T00:32:58.6053029+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -177,13 +177,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:37.8495126+00:00"
+      "explicadoEm": "2026-11-19T00:32:58.6062246+00:00"
     },
     {
-      "id": "EVT-26235074AC05",
-      "ocorridoEm": "2026-11-18T23:30:37.8462814+00:00",
+      "id": "EVT-7A940E92DB59",
+      "ocorridoEm": "2026-11-19T00:32:58.6022461+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -208,13 +208,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:37.8473381+00:00"
+      "explicadoEm": "2026-11-19T00:32:58.6049834+00:00"
     },
     {
-      "id": "EVT-007C17BD430A",
-      "ocorridoEm": "2026-11-18T23:30:37.8427866+00:00",
+      "id": "EVT-844634FE312C",
+      "ocorridoEm": "2026-11-19T00:32:58.5982055+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -239,13 +239,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:37.8451921+00:00"
+      "explicadoEm": "2026-11-19T00:32:58.5996374+00:00"
     },
     {
-      "id": "EVT-A05360F76BED",
-      "ocorridoEm": "2026-11-18T23:30:37.8397831+00:00",
+      "id": "EVT-14E5EC81973F",
+      "ocorridoEm": "2026-11-19T00:32:58.5933429+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5PFH6E17R:0000000B",
+      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -270,13 +270,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:37.8411545+00:00"
+      "explicadoEm": "2026-11-19T00:32:58.5956882+00:00"
     },
     {
-      "id": "EVT-5DC9D1BB1D9B",
-      "ocorridoEm": "2026-11-18T23:30:36.0745381+00:00",
+      "id": "EVT-2AD383E31F0B",
+      "ocorridoEm": "2026-11-19T00:32:57.329445+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5PFH6E17R:00000009",
+      "correlacaoId": "0HNQ5QII1GCJ6:00000008",
       "fonte": "POST /api/v1/seguranca/analises",
       "categorias": [
         "Cpf",
@@ -306,13 +306,13 @@
       "origemMensagem": "Fallback",
       "motivoFallback": "ChaveNaoConfigurada",
       "modeloLlm": null,
-      "explicadoEm": "2026-11-18T23:30:36.0778796+00:00"
+      "explicadoEm": "2026-11-19T00:32:57.3315057+00:00"
     },
     {
-      "id": "EVT-6D9C9ABF9704",
-      "ocorridoEm": "2026-11-18T23:30:35.9994414+00:00",
+      "id": "EVT-06EAB5A157C9",
+      "ocorridoEm": "2026-11-19T00:32:57.276007+00:00",
       "codigo": "PII_ANALISE_SEM_DETECCAO",
-      "correlacaoId": "0HNQ5PFH6E17S:00000001",
+      "correlacaoId": "0HNQ5QII1GCJ7:00000001",
       "fonte": "GET /api/v1/paradas",
       "categorias": [],
       "caminhos": [],
@@ -330,10 +330,10 @@
       "explicadoEm": null
     },
     {
-      "id": "EVT-8459AD5ABCB7",
-      "ocorridoEm": "2026-11-18T23:30:34.793525+00:00",
+      "id": "EVT-0804654158FA",
+      "ocorridoEm": "2026-11-19T00:32:56.2052261+00:00",
       "codigo": "PII_ANALISE_SEM_DETECCAO",
-      "correlacaoId": "0HNQ5PFH6E17R:00000006",
+      "correlacaoId": "0HNQ5QII1GCJ6:00000005",
       "fonte": "GET /api/v1/paradas",
       "categorias": [],
       "caminhos": [],

@@ -21,8 +21,8 @@ Corpo sanitizado: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"c
 Risco: Amarelo
 
 === Cenário 3 · tentativa controlada de saída insegura ===
-HTTP 200 · X-PontoVoz-Protecao: resposta-sanitizada; evento=EVT-C22E6911759C
-Serviço externo: bloqueado (evento EVT-54853147B33C)
+HTTP 200 · X-PontoVoz-Protecao: resposta-sanitizada; evento=EVT-0425BAE91C9F
+Serviço externo: bloqueado (evento EVT-019566EDC0D6)
 Cadastro devolvido: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
 Exceção com o cadastro na mensagem: HTTP 500 · ErroInterno · Ocorreu um erro inesperado. Tente novamente mais tarde.
 Rota real com CPF em origemRegistro: HTTP 422 · DadoPessoalBloqueado
@@ -48,17 +48,17 @@ entradasRejeitadas         : 0
 
 Horário  codigo                   nivelRisco tipoDestino    decisao 
 -------  ------                   ---------- -----------    ------- 
-20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   Persistencia   Bloquear
-20:30:28 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-20:30:28 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
-20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
-20:30:28 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   RespostaHttp   Bloquear
-20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   ServicoExterno Bloquear
-20:30:28 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
-20:30:28 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-20:30:27 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-20:30:27 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
+21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   Persistencia   Bloquear
+21:32:52 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+21:32:52 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
+21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
+21:32:52 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   RespostaHttp   Bloquear
+21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   ServicoExterno Bloquear
+21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
+21:32:52 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+21:32:51 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+21:32:51 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
 
 
 

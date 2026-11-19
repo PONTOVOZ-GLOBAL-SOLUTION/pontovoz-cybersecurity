@@ -3,12 +3,12 @@
 **Global Solution FIAP 2026.2** · Engenharia de Software · Tema **CitizenTech** · Disciplina:
 **Cybersecurity** · Prof. Vitor Lasse
 
-Módulo de proteção de dados pessoais do PontoVoz — Totem Inteligente de Mobilidade Urbana. O
-módulo foi incorporado ao backend C#/.NET 10 do projeto e implementa as quatro partes pedidas:
-**motor de parsing PII**, **Taint Analysis**, **tradução de alertas por IA** e **Dashboard Risco
-Cidadão**.
+Módulo de proteção de dados pessoais do PontoVoz — Totem Inteligente de Mobilidade Urbana.
+Partimos do backend C#/.NET 10 do PontoVoz, que já disponibiliza as consultas de mobilidade, e
+acrescentamos uma camada de segurança com as quatro partes pedidas na disciplina: **motor de
+parsing PII**, **Taint Analysis**, **tradução de alertas por IA** e **Dashboard Risco Cidadão**.
 
-A documentação acadêmica (PDF) é entregue separadamente, como pedido pelo professor. A
+A documentação acadêmica (PDF) e o vídeo da demonstração são entregues separadamente, como pedido
 
 ## O PontoVoz e por que ele precisa de proteção de dados
 
@@ -20,14 +20,14 @@ fictícios e não há totem instalado, GPS em produção nem integração operac
 O uso normal do totem não pede identificação do passageiro. Ainda assim, um passageiro pode
 digitar o CPF no campo de busca, um operador pode preencher um campo administrativo com um
 documento, e funcionalidades futuras (cadastro de acessibilidade, por exemplo) podem receber
-dados de saúde. O módulo garante que esses dados sejam reconhecidos na entrada, acompanhados
-durante a requisição e impedidos de chegar a saídas inseguras: log, resposta HTTP, banco de dados
-e serviços externos.
+dados de saúde. Para tratar esse risco, reconhecemos esses dados na entrada, acompanhamos cada
+valor durante a requisição e impedimos que ele chegue a saídas inseguras: log, resposta HTTP,
+banco de dados e serviços externos.
 
 ## Arquitetura
 
 ```
-Requisição HTTP (query, corpo JSON, formulário)
+Requisição HTTP (query, corpo JSON, formulário, multipart)
         │
         ▼
 InterceptadorDadosPessoais ── MotorPii (regras por campo + Regex + DV do CPF) ──► classificação
@@ -50,10 +50,10 @@ Controllers do PontoVoz           ▼
 
 | Componente | Arquivo | Responsabilidade |
 |---|---|---|
-| Motor PII | [`Pii/MotorPii.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/MotorPii.cs), [`RegrasPii.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/RegrasPii.cs), [`ValidadorCpf.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/ValidadorCpf.cs), [`MascaradorPii.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/MascaradorPii.cs) | Percorre JSON (objetos aninhados e listas), campos de query/formulário e texto livre; classifica e mascara |
+| Motor PII | [`Pii/MotorPii.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/MotorPii.cs), [`RegrasPii.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/RegrasPii.cs), [`ValidadorCpf.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/ValidadorCpf.cs), [`MascaradorPii.cs`](backend/src/PontoVoz.Api/Cybersecurity/Pii/MascaradorPii.cs) | Percorre JSON (objetos aninhados e listas), campos de query, formulário e multipart, e texto livre; classifica e mascara |
 | Source do Taint | [`Taint/InterceptadorDadosPessoais.cs`](backend/src/PontoVoz.Api/Cybersecurity/Taint/InterceptadorDadosPessoais.cs), [`ContextoTaint.cs`](backend/src/PontoVoz.Api/Cybersecurity/Taint/ContextoTaint.cs) | Middleware no início do pipeline: analisa a entrada, cria as marcas e limita tamanho e profundidade |
 | Política e guarda das saídas | [`Taint/PoliticaSinks.cs`](backend/src/PontoVoz.Api/Cybersecurity/Taint/PoliticaSinks.cs), [`GuardaSinks.cs`](backend/src/PontoVoz.Api/Cybersecurity/Taint/GuardaSinks.cs) | Decide mascarar ou bloquear e registra cada interceptação |
-| Sinks | [`Sinks/ProvedorLogProtegido.cs`](backend/src/PontoVoz.Api/Cybersecurity/Sinks/ProvedorLogProtegido.cs), [`SinkPersistenciaInterceptor.cs`](backend/src/PontoVoz.Api/Cybersecurity/Sinks/SinkPersistenciaInterceptor.cs) e o buffer de resposta do interceptador | Log/console, SQLite (EF Core) e resposta HTTP, inclusive de erro |
+| Sinks | [`Sinks/ProvedorLogProtegido.cs`](backend/src/PontoVoz.Api/Cybersecurity/Sinks/ProvedorLogProtegido.cs), [`SinkPersistenciaInterceptor.cs`](backend/src/PontoVoz.Api/Cybersecurity/Sinks/SinkPersistenciaInterceptor.cs) e o buffer de resposta do interceptador | Log/console (mensagens, exceções e escopos), SQLite (EF Core) e resposta HTTP, inclusive de erro |
 | Auditoria e risco | [`Auditoria/`](backend/src/PontoVoz.Api/Cybersecurity/Auditoria) | Eventos só com metadados; indicador de Risco Cidadão |
 | IA | [`IA/`](backend/src/PontoVoz.Api/Cybersecurity/IA) | Prompt sanitizado, clientes Gemini e OpenAI, validação da resposta e fallback local |
 | API do painel | [`Api/`](backend/src/PontoVoz.Api/Cybersecurity/Api) | Rotas `/api/v1/seguranca` e cenários de demonstração |
@@ -105,7 +105,8 @@ configurada, o painel pede o valor do cabeçalho `X-PontoVoz-Admin-Key`.
 
 ## Como reproduzir os cenários
 
-No painel, os botões executam chamadas reais ao backend; os indicadores e o histórico são lidos de
+Organizamos a demonstração em quatro cenários, um para cada mecanismo. No painel, os botões
+executam chamadas reais ao backend; os indicadores e o histórico são lidos de
 `GET /api/v1/seguranca/painel` a cada 2,5 s.
 
 | Cenário | Botão | O que acontece | Resultado esperado |
@@ -126,8 +127,9 @@ powershell -ExecutionPolicy Bypass -File backend/scripts/demonstracao-seguranca.
 ```
 
 As rotas de demonstração só existem em Development, com `Cybersecurity:Demonstracao:Habilitada`
-verdadeira (já definida em `appsettings.Development.json`) e para chamadas da própria máquina;
-nos demais casos respondem 404.
+verdadeira (já definida em `appsettings.Development.json`) e para chamadas cujo endereço remoto é
+de loopback (`127.0.0.1` ou `::1`); sem endereço remoto conhecido, ou em qualquer outro caso,
+respondem 404.
 
 ## Motor de parsing PII
 
@@ -145,6 +147,8 @@ Os nomes de campo são comparados por palavra e sem acentos (`cargo` não é lid
 detecção registra categoria, sensibilidade, caminho JSON (`$.passageiro.contatos[1].valor`),
 regra, confiança e ação; o valor detectado nunca entra nos metadados. Corpos acima de 64 KiB
 recebem 413 e JSON com mais de 32 níveis ou 5.000 elementos recebe 400, antes dos controllers.
+Em `multipart/form-data`, os campos de texto são analisados pelo nome, como num formulário comum;
+partes com arquivo não são lidas (o PontoVoz não recebe arquivos).
 
 ## Taint Analysis
 
@@ -152,7 +156,8 @@ recebem 413 e JSON com mais de 32 níveis ou 5.000 elementos recebe 400, antes d
    requisição, com uma marca por ocorrência (`T1 Cpf/DadoPessoal em $.cpf`) e os valores originais
    apenas na memória da requisição.
 2. **Propagação:** todas as saídas da requisição consultam o contexto. O valor é reconhecido mesmo
-   dentro de outro texto, só com dígitos ou escapado por um serializador JSON.
+   dentro de outro texto, só com dígitos ou escapado por um serializador JSON. Nos logs, a
+   verificação vale para a mensagem, para o texto das exceções e para os escopos (`BeginScope`).
 3. **Sinks e política** ([`PoliticaSinks`](backend/src/PontoVoz.Api/Cybersecurity/Taint/PoliticaSinks.cs)):
 
 | Saída | Dado pessoal | Dado sensível (saúde) | Segredo (senha) |
@@ -178,12 +183,12 @@ vazamento quando houve bloqueio, sem promessas absolutas, sem alarmismo, sem dad
 português); se reprovada, ou se o provedor falhar, vale a mensagem local, e o motivo fica na
 auditoria (`ChaveNaoConfigurada`, `TempoEsgotado`, `ServicoIndisponivel`, `RespostaInadequada:...`).
 
-**Situação da credencial nesta entrega:** nenhuma chave de LLM estava disponível no ambiente de
+**Situação da credencial nesta entrega:** não tivemos uma chave de LLM disponível no ambiente de
 desenvolvimento. A integração (Gemini por padrão, OpenAI opcional) está implementada e testada com
-respostas simuladas, mas **nenhuma chamada real a um provedor foi feita**; as evidências mostram o
-fallback identificado como tal.
+respostas HTTP simuladas, mas **nenhuma chamada real a um provedor foi feita**. As evidências e o
+vídeo mostram o fallback, identificado como tal no painel.
 
-Para ativar a chamada real, configure a chave fora do repositório:
+Para ativar a chamada real, basta configurar a chave fora do repositório:
 
 ```bash
 dotnet user-secrets set "Cybersecurity:Llm:ChaveApi" "<sua-chave>" --project backend/src/PontoVoz.Api
@@ -211,11 +216,11 @@ destino. O nível é calculado pelo backend a partir dos eventos; a IA apenas re
 dotnet test
 ```
 
-Resultado registrado nesta entrega: **992 testes, 992 aprovados** — os 816 testes originais do
-PontoVoz e 176 do módulo (pasta [`backend/tests/PontoVoz.Tests/Cybersecurity`](backend/tests/PontoVoz.Tests/Cybersecurity)):
+Resultado registrado nesta entrega: **1001 testes, 1001 aprovados** — os 816 testes originais do
+PontoVoz e 185 do módulo (pasta [`backend/tests/PontoVoz.Tests/Cybersecurity`](backend/tests/PontoVoz.Tests/Cybersecurity)):
 motor PII e validação de CPF, máscaras, política e guarda das saídas, sink de log, auditoria e
-risco, clientes do LLM com HTTP simulado, validação das mensagens e testes de integração com a
-API real em memória. Nenhum teste chama um provedor externo. Para rodar só os testes do módulo:
+risco, clientes do LLM com HTTP simulado, validação das mensagens, escopos de log, formulário
+multipart, acesso às rotas de demonstração e testes de integração com a API real em memória. Nenhum teste chama um provedor externo. Para rodar só os testes do módulo:
 
 ```bash
 dotnet test -- --filter-namespace PontoVoz.Tests.Cybersecurity
@@ -225,9 +230,13 @@ dotnet test -- --filter-namespace PontoVoz.Tests.Cybersecurity
 
 Em [`docs/evidencias/cybersecurity`](docs/evidencias/cybersecurity/README.md): capturas do painel
 em cada cenário, trechos do código, saídas dos testes, o log do console durante a demonstração e
-as respostas JSON exportadas da API. As capturas do painel podem ser refeitas com
-`backend/scripts/capturar-evidencias.py` (Python + Playwright, com a API rodando).
+as respostas JSON exportadas da API. Com a API rodando, as capturas do painel são refeitas por
+`backend/scripts/capturar-evidencias.py` e o vídeo por `backend/scripts/gravar-video-demonstracao.py`
+(Python + Playwright, com o Google Chrome). As capturas de código e o PDF são gerados por
+[`docs/documentacao`](docs/documentacao).
 
+| Documento | Conteúdo |
+|---|---|
 
 ## Limitações
 
@@ -239,6 +248,7 @@ as respostas JSON exportadas da API. As capturas do painel podem ser refeitas co
   dado de saúde; 11 dígitos com DV de CPF válido em campo genérico são tratados como CPF.
 - Valores com menos de 4 caracteres são mascarados na entrada, mas não são procurados nas saídas.
 - Transformações do valor (codificação Base64, criptografia, reordenação) não são rastreadas.
+- Em `multipart/form-data`, o conteúdo de arquivos anexados não é analisado.
 - A trilha de auditoria fica em memória (últimos 500 eventos) e é perdida ao reiniciar a API;
   a exportação JSON (`GET /api/v1/seguranca/auditoria`) serve para guardar a evidência.
 - A chamada real ao LLM não foi validada nesta entrega (ver "Inteligência artificial").
@@ -254,6 +264,5 @@ as respostas JSON exportadas da API. As capturas do painel podem ser refeitas co
 
 ## Uso de inteligência artificial
 
-O módulo de Cybersecurity, os testes e esta documentação foram desenvolvidos com apoio de um
-assistente de programação baseado em IA, a partir das orientações da equipe e dos documentos da
-entrega de Cybersecurity.
+Utilizamos um assistente de programação baseado em IA como apoio no desenvolvimento do módulo,
+dos testes e desta documentação, a partir das nossas orientações e dos documentos da disciplina.

@@ -91,9 +91,9 @@ public sealed class DemonstracaoLocalFilter(IOptions<OpcoesCybersecurity> opcoes
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(next);
+        // Sem endereço remoto conhecido a origem não pode ser confirmada, e a rota não é liberada.
         IPAddress? remoto = context.HttpContext.Connection.RemoteIpAddress;
-        // O servidor de testes em memória não informa endereço remoto; o Kestrel sempre informa.
-        bool local = remoto is null || IPAddress.IsLoopback(remoto);
+        bool local = remoto is not null && IPAddress.IsLoopback(remoto);
 
         if (!Habilitada(opcoes.Value, ambiente) || !local)
         {
