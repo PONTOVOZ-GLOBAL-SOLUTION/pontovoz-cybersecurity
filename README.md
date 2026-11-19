@@ -8,8 +8,7 @@ Partimos do backend do PontoVoz desenvolvido pelo grupo (C#/.NET 10), que já di
 consultas de mobilidade, e acrescentamos uma camada de segurança com as quatro partes pedidas na disciplina: **motor de
 parsing PII**, **Taint Analysis**, **tradução de alertas por IA** e **Dashboard Risco Cidadão**.
 
-A documentação acadêmica (PDF) e o vídeo da demonstração são entregues separadamente, como pedido
-pelo professor.
+A documentação acadêmica (PDF) e o vídeo da demonstração são entregues separadamente.
 
 Vídeo da demonstração: https://youtu.be/3Ye8f3cHu58
 
