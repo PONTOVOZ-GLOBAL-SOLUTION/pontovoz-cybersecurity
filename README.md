@@ -26,6 +26,15 @@ dados de saúde. Para tratar esse risco, reconhecemos esses dados na entrada, ac
 valor durante a requisição e impedimos que ele chegue a saídas inseguras: log, resposta HTTP,
 banco de dados e serviços externos.
 
+## ODS conectados
+
+O PontoVoz está conectado a dois Objetivos de Desenvolvimento Sustentável da ONU:
+
+| ODS | Meta | Como o PontoVoz contribui |
+|---|---|---|
+| **ODS 10: Redução das desigualdades** | 10.2: empoderar e promover a inclusão social, econômica e política de todos, independentemente da idade, deficiência ou condição econômica | O totem oferece a informação de transporte no próprio ponto, sem exigir smartphone nem internet, o que amplia o acesso de idosos, pessoas com deficiência e quem não tem celular. A proteção de dados permite atender esse público sem expô-lo: um dado pessoal digitado por engano não fica registrado nem aparece em tela. |
+| **ODS 11: Cidades e comunidades sustentáveis** | 11.2: proporcionar acesso a sistemas de transporte seguros, acessíveis e sustentáveis para todos, com atenção às pessoas em situação de vulnerabilidade | Previsões de chegada, últimas passagens e alternativas de deslocamento tornam o ônibus mais previsível. O módulo de Cybersecurity cuida para que esse serviço digital também seja seguro: o Taint Analysis impede que dados pessoais cheguem a logs, respostas, banco ou serviços externos, e o painel Risco Cidadão mostra de forma clara o que foi bloqueado. |
+
 ## Arquitetura
 
 ```
