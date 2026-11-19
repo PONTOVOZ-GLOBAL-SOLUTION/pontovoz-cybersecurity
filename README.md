@@ -1,14 +1,18 @@
-# PontoVoz — Cybersecurity
+# PontoVoz · Cybersecurity
 
 **Global Solution FIAP 2026.2** · Engenharia de Software · Tema **CitizenTech** · Disciplina:
 **Cybersecurity** · Prof. Vitor Lasse
 
-Módulo de proteção de dados pessoais do PontoVoz — Totem Inteligente de Mobilidade Urbana.
+Módulo de proteção de dados pessoais do PontoVoz, o Totem Inteligente de Mobilidade Urbana.
 Partimos do backend C#/.NET 10 do PontoVoz, que já disponibiliza as consultas de mobilidade, e
 acrescentamos uma camada de segurança com as quatro partes pedidas na disciplina: **motor de
 parsing PII**, **Taint Analysis**, **tradução de alertas por IA** e **Dashboard Risco Cidadão**.
 
-A documentação acadêmica (PDF) e o vídeo narrado da demonstração são entregues separadamente, como pedido
+A documentação acadêmica (PDF) e o vídeo da demonstração são entregues separadamente, como pedido
+pelo professor.
+
+Vídeo da demonstração: https://youtu.be/3Ye8f3cHu58
+
 
 ## O PontoVoz e por que ele precisa de proteção de dados
 
@@ -137,7 +141,7 @@ respondem 404.
 |---|---|---|---|---|
 | CPF | `cpf`, `cpfTitular`, `documento` com formato de CPF | `000.000.000-00` com dígitos verificadores válidos; 11 dígitos com DV válido; rótulo "CPF" + formato | Dado pessoal | `***.456.***-00` |
 | RG | `rg`, `numeroRg`, `identidade`, `registroGeral` | rótulo "RG" + número; formato `00.000.000-0` | Dado pessoal | `**.***.**8-X` |
-| Documento | `documento`, `cnh`, `passaporte`, `cns`, `pis` | — | Dado pessoal | últimos 2 caracteres |
+| Documento | `documento`, `cnh`, `passaporte`, `cns`, `pis` | (só pelo nome do campo) | Dado pessoal | últimos 2 caracteres |
 | E-mail | `email` | padrão de e-mail | Dado pessoal | `p***@e***.br` |
 | Telefone | `telefone`, `celular`, `whatsapp` | `(11) 91234-5678`, `+55 ...`, celular de 11 dígitos | Dado pessoal | `(**) *****-5678` |
 | Saúde | `laudo`, `diagnostico`, `cid`, `saude`, `medicamento`, `alergia`, `deficiencia`... (a estrutura inteira sob o campo) | código CID-10; expressões como "laudo médico", "diagnosticado com", "portador de" | Dado pessoal sensível | suprimido |
@@ -175,8 +179,8 @@ detecção da entrada.
 
 ## Inteligência artificial
 
-O `TradutorRiscoCidadao` monta o prompt só com enumerações do evento — código, categorias
-genéricas ("CPF", "informação de saúde"), tipo de destino e ação — e pede a tradução "para um
+O `TradutorRiscoCidadao` monta o prompt só com enumerações do evento (código, categorias
+genéricas como "CPF" e "informação de saúde", tipo de destino e ação) e pede a tradução "para um
 cidadão leigo de 60 anos, em até 2 frases". O prompt passa pela mesma guarda das saídas externas
 antes do envio. A resposta é validada (tamanho, até 3 frases, sem termos técnicos, sem afirmar
 vazamento quando houve bloqueio, sem promessas absolutas, sem alarmismo, sem dado pessoal, em
@@ -221,7 +225,7 @@ destino. O nível é calculado pelo backend a partir dos eventos; a IA apenas re
 dotnet test
 ```
 
-Resultado registrado nesta entrega: **1001 testes, 1001 aprovados** — os 816 testes originais do
+Resultado registrado nesta entrega: **1001 testes, 1001 aprovados**: os 816 testes originais do
 PontoVoz e 185 do módulo (pasta [`backend/tests/PontoVoz.Tests/Cybersecurity`](backend/tests/PontoVoz.Tests/Cybersecurity)):
 motor PII e validação de CPF, máscaras, política e guarda das saídas, sink de log, auditoria e
 risco, clientes do LLM com HTTP simulado, validação das mensagens, escopos de log, formulário
@@ -236,10 +240,7 @@ dotnet test -- --filter-namespace PontoVoz.Tests.Cybersecurity
 
 Em [`docs/evidencias/cybersecurity`](docs/evidencias/cybersecurity/README.md): capturas do painel
 em cada cenário, trechos do código, saídas dos testes, o log do console durante a demonstração e
-as respostas JSON exportadas da API. Com a API rodando, as capturas do painel são refeitas por
-`backend/scripts/capturar-evidencias.py` e o vídeo por `backend/scripts/gravar-video-demonstracao.py`
-(Python + Playwright, com o Google Chrome). As capturas de código e o PDF são gerados por
-[`docs/documentacao`](docs/documentacao).
+as respostas JSON exportadas da API.
 
 | Documento | Conteúdo |
 |---|---|

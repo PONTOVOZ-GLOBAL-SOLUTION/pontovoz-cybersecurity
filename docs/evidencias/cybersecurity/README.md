@@ -1,4 +1,4 @@
-# Evidências — Cybersecurity
+# Evidências · Cybersecurity
 
 Capturas e saídas que geramos em 18/11/2026 com a API em execução local (Development), com a
 chave do Gemini configurada (`gemini-3.5-flash-lite`), na versão publicada após a auditoria final. Todos os dados enviados
