@@ -4,7 +4,7 @@
 **Disciplina:** Cybersecurity  
 **Projeto:** PontoVoz, Totem Inteligente de Mobilidade Urbana
 
-Este documento reúne exemplos de perguntas voltadas ao estudo e à discussão dos conceitos de segurança aplicados ao PontoVoz.
+Este documento reúne todos prompt utilizado no decorrer do projeto, todos voltados ao estudo e à discussão dos conceitos de segurança aplicados ao PontoVoz.
 
 ## 1. Mapeamento e classificação de dados pessoais (PII)
 
