@@ -272,3 +272,6 @@ junto com o vídeo da demonstração: https://youtu.be/3Ye8f3cHu58
 
 Utilizamos um assistente de programação baseado em IA como apoio no desenvolvimento do módulo,
 dos testes e desta documentação, a partir das nossas orientações e dos documentos da disciplina.
+
+As perguntas de estudo e debate sobre os conceitos de segurança aplicados ao PontoVoz estão em
+[`prompts.md`](prompts.md).
