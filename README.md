@@ -4,15 +4,14 @@
 **Cybersecurity** · Prof. Vitor Lasse
 
 Módulo de proteção de dados pessoais do PontoVoz, o Totem Inteligente de Mobilidade Urbana.
-Partimos do backend C#/.NET 10 do PontoVoz, que já disponibiliza as consultas de mobilidade, e
-acrescentamos uma camada de segurança com as quatro partes pedidas na disciplina: **motor de
+Partimos do backend do PontoVoz desenvolvido pelo grupo (C#/.NET 10), que já disponibiliza as
+consultas de mobilidade, e acrescentamos uma camada de segurança com as quatro partes pedidas na disciplina: **motor de
 parsing PII**, **Taint Analysis**, **tradução de alertas por IA** e **Dashboard Risco Cidadão**.
 
 A documentação acadêmica (PDF) e o vídeo da demonstração são entregues separadamente, como pedido
 pelo professor.
 
 Vídeo da demonstração: https://youtu.be/3Ye8f3cHu58
-
 
 ## O PontoVoz e por que ele precisa de proteção de dados
 
@@ -225,7 +224,7 @@ destino. O nível é calculado pelo backend a partir dos eventos; a IA apenas re
 dotnet test
 ```
 
-Resultado registrado nesta entrega: **1001 testes, 1001 aprovados**: os 816 testes originais do
+Resultado registrado nesta entrega: **1001 testes, 1001 aprovados**: os 816 testes do backend do
 PontoVoz e 185 do módulo (pasta [`backend/tests/PontoVoz.Tests/Cybersecurity`](backend/tests/PontoVoz.Tests/Cybersecurity)):
 motor PII e validação de CPF, máscaras, política e guarda das saídas, sink de log, auditoria e
 risco, clientes do LLM com HTTP simulado, validação das mensagens, escopos de log, formulário
@@ -242,8 +241,8 @@ Em [`docs/evidencias/cybersecurity`](docs/evidencias/cybersecurity/README.md): c
 em cada cenário, trechos do código, saídas dos testes, o log do console durante a demonstração e
 as respostas JSON exportadas da API.
 
-| Documento | Conteúdo |
-|---|---|
+A documentação acadêmica (PDF, com prints do código e das evidências) é entregue separadamente,
+junto com o vídeo da demonstração: https://youtu.be/3Ye8f3cHu58
 
 ## Limitações
 
