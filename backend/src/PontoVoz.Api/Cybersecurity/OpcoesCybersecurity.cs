@@ -39,7 +39,7 @@ public sealed class OpcoesLlm
     /// <summary><c>Gemini</c>, <c>OpenAI</c> ou <c>Nenhum</c> (somente mensagens locais).</summary>
     public string Provedor { get; set; } = "Gemini";
 
-    public string Modelo { get; set; } = "gemini-2.5-flash";
+    public string Modelo { get; set; } = "gemini-3.5-flash-lite";
 
     /// <summary>Endereço base da API do provedor; vazio usa o endereço oficial.</summary>
     public string? UrlBase { get; set; }

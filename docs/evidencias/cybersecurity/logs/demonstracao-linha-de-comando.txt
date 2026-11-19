@@ -21,15 +21,15 @@ Corpo sanitizado: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"c
 Risco: Amarelo
 
 === Cenário 3 · tentativa controlada de saída insegura ===
-HTTP 200 · X-PontoVoz-Protecao: resposta-sanitizada; evento=EVT-0425BAE91C9F
-Serviço externo: bloqueado (evento EVT-019566EDC0D6)
+HTTP 200 · X-PontoVoz-Protecao: resposta-sanitizada; evento=EVT-01EA022340DF
+Serviço externo: bloqueado (evento EVT-1EAA733A8943)
 Cadastro devolvido: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
 Exceção com o cadastro na mensagem: HTTP 500 · ErroInterno · Ocorreu um erro inesperado. Tente novamente mais tarde.
 Rota real com CPF em origemRegistro: HTTP 422 · DadoPessoalBloqueado
 
 === Cenário 4 · explicação do evento de maior risco ===
-Mensagem ao cidadão: Identificamos uma tentativa de envio de informação pessoal para uma área não autorizada. O sistema bloqueou essa operação para ajudar a proteger seus dados.
-Origem: Fallback ChaveNaoConfigurada · chamada externa realizada: False
+Mensagem ao cidadão: O totem PontoVoz identificou que o número do seu documento seria salvo e bloqueou o envio. A informação foi substituída por um aviso de proteção para manter seus dados seguros.
+Origem: Llm  · chamada externa realizada: True
 Dados enviados ao LLM: {"codigoEvento":"PII_TAINT_SINK_BLOCKED","categoriasGenericas":["CPF"],"destinoDaTentativa":"o armazenamento permanente do sistema","acaoExecutada":"o envio foi bloqueado e a informação foi substituída por um aviso de proteção","resultado":"a informação original não chegou ao destino","nivelRisco":"vermelho","publico":"cidadão leigo de 60 anos, usuário de ônibus em São Paulo"}
 
 === Estado final do painel ===
@@ -48,17 +48,17 @@ entradasRejeitadas         : 0
 
 Horário  codigo                   nivelRisco tipoDestino    decisao 
 -------  ------                   ---------- -----------    ------- 
-21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   Persistencia   Bloquear
-21:32:52 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-21:32:52 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
-21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
-21:32:52 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   RespostaHttp   Bloquear
-21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   ServicoExterno Bloquear
-21:32:52 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
-21:32:52 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-21:32:51 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
-21:32:51 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
+23:46:51 PII_TAINT_SINK_BLOCKED   Vermelho   Persistencia   Bloquear
+23:46:51 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+23:46:51 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
+23:46:51 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
+23:46:51 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+23:46:51 PII_TAINT_SINK_BLOCKED   Vermelho   RespostaHttp   Bloquear
+23:46:51 PII_TAINT_SINK_BLOCKED   Vermelho   ServicoExterno Bloquear
+23:46:51 PII_TAINT_SINK_BLOCKED   Vermelho   Log            Bloquear
+23:46:51 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+23:46:50 PII_DETECTADO_PROTEGIDO  Amarelo                   Mascarar
+23:46:50 PII_ANALISE_SEM_DETECCAO Verde                     Permitir
 
 
 

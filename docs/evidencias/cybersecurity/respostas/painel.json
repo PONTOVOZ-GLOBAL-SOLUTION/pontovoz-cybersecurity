@@ -4,9 +4,9 @@
     "nivel": "Vermelho",
     "titulo": "Tentativa de saída insegura bloqueada",
     "descricao": "5 tentativas de enviar dado pessoal para destino não autorizado nos últimos 30 minutos. A política de proteção interceptou o envio: o valor original não chegou ao destino.",
-    "mensagemCidadao": "Identificamos uma tentativa de envio de informação pessoal para uma área não autorizada. O sistema bloqueou essa operação para ajudar a proteger seus dados.",
-    "origemMensagem": "Fallback",
-    "eventoReferenciaId": "EVT-BEF28C6E8160",
+    "mensagemCidadao": "O totem PontoVoz identificou que o número do seu CPF tentou ser salvo por engano e bloqueou o envio. Para sua segurança, a informação foi substituída por um aviso de proteção e não foi armazenada.",
+    "origemMensagem": "Llm",
+    "eventoReferenciaId": "EVT-65E0FA40A377",
     "janelaMinutos": 30
   },
   "indicadores": {
@@ -18,10 +18,10 @@
   },
   "eventos": [
     {
-      "id": "EVT-BEF28C6E8160",
-      "ocorridoEm": "2026-11-19T00:33:01.4126297+00:00",
+      "id": "EVT-65E0FA40A377",
+      "ocorridoEm": "2026-11-19T02:48:12.1100243+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5QII1GCJ6:00000012",
+      "correlacaoId": "0HNQ5STCNC8F8:00000012",
       "fonte": "POST /api/v1/admin/observacoes-passagem",
       "categorias": [
         "Cpf"
@@ -36,17 +36,17 @@
       "nivelRisco": "Vermelho",
       "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf a caminho de Persistencia (persistencia:PassagemRegistroManual._origemRegistro); política aplicada: Bloquear.",
       "quantidadeDeteccoes": 1,
-      "mensagemCidadao": "Identificamos uma tentativa de envio de informação pessoal para uma área não autorizada. O sistema bloqueou essa operação para ajudar a proteger seus dados.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:33:03.6917563+00:00"
+      "mensagemCidadao": "O totem PontoVoz identificou que o número do seu CPF tentou ser salvo por engano e bloqueou o envio. Para sua segurança, a informação foi substituída por um aviso de proteção e não foi armazenada.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:15.1149619+00:00"
     },
     {
-      "id": "EVT-73816F847B12",
-      "ocorridoEm": "2026-11-19T00:33:01.4061323+00:00",
+      "id": "EVT-BC366DB944D5",
+      "ocorridoEm": "2026-11-19T02:48:12.1045274+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5QII1GCJ6:00000012",
+      "correlacaoId": "0HNQ5STCNC8F8:00000012",
       "fonte": "POST /api/v1/admin/observacoes-passagem",
       "categorias": [
         "Cpf"
@@ -61,17 +61,17 @@
       "nivelRisco": "Amarelo",
       "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 1 marca(s) em corpo JSON — T1 Cpf/DadoPessoal em $.origemRegistro (texto-11-digitos+dv)",
       "quantidadeDeteccoes": 1,
-      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:33:01.4070318+00:00"
+      "mensagemCidadao": "O sistema identificou o número do seu documento e garantiu que ele ficasse protegido. Essa informação continua segura e não foi compartilhada.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:12.1055281+00:00"
     },
     {
-      "id": "EVT-BF5D7095AA26",
-      "ocorridoEm": "2026-11-19T00:33:01.3874141+00:00",
+      "id": "EVT-8FBA6EEBD070",
+      "ocorridoEm": "2026-11-19T02:48:12.0878051+00:00",
       "codigo": "PII_ANALISE_SEM_DETECCAO",
-      "correlacaoId": "0HNQ5QII1GCJ6:00000010",
+      "correlacaoId": "0HNQ5STCNC8F8:00000010",
       "fonte": "GET /api/v1/paradas",
       "categorias": [],
       "caminhos": [],
@@ -89,10 +89,10 @@
       "explicadoEm": null
     },
     {
-      "id": "EVT-E85999E999C8",
-      "ocorridoEm": "2026-11-19T00:33:00.6148736+00:00",
+      "id": "EVT-3CE2138D7FA7",
+      "ocorridoEm": "2026-11-19T02:48:11.3026255+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5QII1GCJ6:0000000E",
+      "correlacaoId": "0HNQ5STCNC8F8:0000000E",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -113,17 +113,17 @@
       "nivelRisco": "Vermelho",
       "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de Log (log:PontoVoz.Api.Middleware.TratadorExcecoes); política aplicada: Bloquear.",
       "quantidadeDeteccoes": 4,
-      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:33:00.616382+00:00"
+      "mensagemCidadao": "Identificamos a tentativa de registrar dados pessoais como seu CPF e senha no sistema do totem. O envio foi bloqueado e substituído por um aviso de proteção para manter suas informações seguras.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:11.3046563+00:00"
     },
     {
-      "id": "EVT-FE8D14A90F4A",
-      "ocorridoEm": "2026-11-19T00:33:00.6071803+00:00",
+      "id": "EVT-B3B6FA4E4B60",
+      "ocorridoEm": "2026-11-19T02:48:11.2983848+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5QII1GCJ6:0000000E",
+      "correlacaoId": "0HNQ5STCNC8F8:0000000E",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -144,17 +144,17 @@
       "nivelRisco": "Amarelo",
       "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 4 marca(s) em query string + corpo JSON — T1 Cpf/DadoPessoal em $.cpf (campo-cpf+dv-valido); T2 Senha/SegredoAutenticacao em $.senha (campo-senha); T3 Saude/DadoPessoalSensivel em $.saude (campo-saude-estrutura); T4 Email/DadoPessoal em $.email (campo-email)",
       "quantidadeDeteccoes": 4,
-      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:33:00.6094367+00:00"
+      "mensagemCidadao": "Notamos que dados pessoais como seu CPF e e-mail foram identificados ao usar o totem. O sistema aplicou proteção imediata para manter essas informações em segurança.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:11.2998824+00:00"
     },
     {
-      "id": "EVT-197EC5F49955",
-      "ocorridoEm": "2026-11-19T00:32:58.6053029+00:00",
+      "id": "EVT-1122D9BC5B6F",
+      "ocorridoEm": "2026-11-19T02:48:09.3580504+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
+      "correlacaoId": "0HNQ5STCNC8F8:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -175,17 +175,17 @@
       "nivelRisco": "Vermelho",
       "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de RespostaHttp (resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado); política aplicada: Bloquear.",
       "quantidadeDeteccoes": 4,
-      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:32:58.6062246+00:00"
+      "mensagemCidadao": "O totem PontoVoz identificou dados pessoais sensíveis tentando aparecer na tela e bloqueou essa exibição. A informação protegida foi substituída por um aviso para garantir sua segurança.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:09.3596619+00:00"
     },
     {
-      "id": "EVT-7A940E92DB59",
-      "ocorridoEm": "2026-11-19T00:32:58.6022461+00:00",
+      "id": "EVT-5D7FDCC99FFF",
+      "ocorridoEm": "2026-11-19T02:48:09.3553459+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
+      "correlacaoId": "0HNQ5STCNC8F8:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -206,17 +206,17 @@
       "nivelRisco": "Vermelho",
       "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de ServicoExterno (servico-externo:parceiro-ficticio); política aplicada: Bloquear.",
       "quantidadeDeteccoes": 4,
-      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:32:58.6049834+00:00"
+      "mensagemCidadao": "O totem PontoVoz identificou uma tentativa de enviar dados pessoais seus para fora do sistema e bloqueou o envio. Para sua segurança, a informação foi substituída por um aviso de proteção e não foi compartilhada.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:09.3570208+00:00"
     },
     {
-      "id": "EVT-844634FE312C",
-      "ocorridoEm": "2026-11-19T00:32:58.5982055+00:00",
+      "id": "EVT-0ABA2D14584D",
+      "ocorridoEm": "2026-11-19T02:48:09.353633+00:00",
       "codigo": "PII_TAINT_SINK_BLOCKED",
-      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
+      "correlacaoId": "0HNQ5STCNC8F8:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -237,17 +237,17 @@
       "nivelRisco": "Vermelho",
       "mensagemTecnica": "PII_TAINT_SINK_BLOCKED: Cpf, Email, Saude, Senha a caminho de Log (log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController); política aplicada: Bloquear.",
       "quantidadeDeteccoes": 4,
-      "mensagemCidadao": "Identificamos uma tentativa de enviar uma informação de saúde para uma área não autorizada. O sistema bloqueou essa operação para proteger sua privacidade.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:32:58.5996374+00:00"
+      "mensagemCidadao": "Identificamos a tentativa de registrar dados pessoais como seu CPF e senha no sistema do totem. O envio foi bloqueado e substituído por um aviso de proteção para manter suas informações seguras.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:09.3548078+00:00"
     },
     {
-      "id": "EVT-14E5EC81973F",
-      "ocorridoEm": "2026-11-19T00:32:58.5933429+00:00",
+      "id": "EVT-4F74AC8F878A",
+      "ocorridoEm": "2026-11-19T02:48:09.3508596+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5QII1GCJ6:0000000A",
+      "correlacaoId": "0HNQ5STCNC8F8:0000000A",
       "fonte": "POST /api/v1/seguranca/demonstracao/vazamento-controlado",
       "categorias": [
         "Cpf",
@@ -268,17 +268,17 @@
       "nivelRisco": "Amarelo",
       "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 4 marca(s) em query string + corpo JSON — T1 Cpf/DadoPessoal em $.cpf (campo-cpf+dv-valido); T2 Senha/SegredoAutenticacao em $.senha (campo-senha); T3 Saude/DadoPessoalSensivel em $.saude (campo-saude-estrutura); T4 Email/DadoPessoal em $.email (campo-email)",
       "quantidadeDeteccoes": 4,
-      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:32:58.5956882+00:00"
+      "mensagemCidadao": "Notamos que dados pessoais como seu CPF e e-mail foram identificados ao usar o totem. O sistema aplicou proteção imediata para manter essas informações em segurança.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:09.3521375+00:00"
     },
     {
-      "id": "EVT-2AD383E31F0B",
-      "ocorridoEm": "2026-11-19T00:32:57.329445+00:00",
+      "id": "EVT-F98C8C8F62E2",
+      "ocorridoEm": "2026-11-19T02:48:08.0138178+00:00",
       "codigo": "PII_DETECTADO_PROTEGIDO",
-      "correlacaoId": "0HNQ5QII1GCJ6:00000008",
+      "correlacaoId": "0HNQ5STCNC8F8:00000007",
       "fonte": "POST /api/v1/seguranca/analises",
       "categorias": [
         "Cpf",
@@ -304,17 +304,17 @@
       "nivelRisco": "Amarelo",
       "mensagemTecnica": "PII_DETECTADO_PROTEGIDO: 7 marca(s) em corpo JSON — T1 Cpf/DadoPessoal em $.passageiro.cpf (campo-cpf+dv-valido); T2 Rg/DadoPessoal em $.passageiro.rg (campo-rg); T3 Email/DadoPessoal em $.passageiro.contatos[0].valor (texto-email); T4 Telefone/DadoPessoal em $.passageiro.contatos[1].valor (texto-telefone-formatado); T5 Saude/DadoPessoalSensivel em $.acessibilidade.laudo (campo-saude); T6 Senha/SegredoAutenticacao em $.senha (campo-senha); T7 Cpf/DadoPessoal em $.observacao (texto-cpf-formatado+dv)",
       "quantidadeDeteccoes": 7,
-      "mensagemCidadao": "Recebemos uma informação pessoal junto com a sua solicitação. O sistema passou a protegê-la e mostra apenas parte dela quando necessário.",
-      "origemMensagem": "Fallback",
-      "motivoFallback": "ChaveNaoConfigurada",
-      "modeloLlm": null,
-      "explicadoEm": "2026-11-19T00:32:57.3315057+00:00"
+      "mensagemCidadao": "Identificamos dados pessoais como seu CPF, RG ou telefone que poderiam estar visíveis por engano. O sistema ocultou essas informações automaticamente para manter sua privacidade segura.",
+      "origemMensagem": "Llm",
+      "motivoFallback": null,
+      "modeloLlm": "Gemini/gemini-3.5-flash-lite",
+      "explicadoEm": "2026-11-19T02:48:08.0160488+00:00"
     },
     {
-      "id": "EVT-06EAB5A157C9",
-      "ocorridoEm": "2026-11-19T00:32:57.276007+00:00",
+      "id": "EVT-C247372BD809",
+      "ocorridoEm": "2026-11-19T02:48:07.9795988+00:00",
       "codigo": "PII_ANALISE_SEM_DETECCAO",
-      "correlacaoId": "0HNQ5QII1GCJ7:00000001",
+      "correlacaoId": "0HNQ5STCNC8F9:00000001",
       "fonte": "GET /api/v1/paradas",
       "categorias": [],
       "caminhos": [],
@@ -332,10 +332,10 @@
       "explicadoEm": null
     },
     {
-      "id": "EVT-0804654158FA",
-      "ocorridoEm": "2026-11-19T00:32:56.2052261+00:00",
+      "id": "EVT-293FCEE7FA87",
+      "ocorridoEm": "2026-11-19T02:48:07.0238142+00:00",
       "codigo": "PII_ANALISE_SEM_DETECCAO",
-      "correlacaoId": "0HNQ5QII1GCJ6:00000005",
+      "correlacaoId": "0HNQ5STCNC8F8:00000005",
       "fonte": "GET /api/v1/paradas",
       "categorias": [],
       "caminhos": [],
@@ -355,9 +355,9 @@
   ],
   "ia": {
     "provedor": "Gemini",
-    "modelo": "gemini-2.5-flash",
-    "chaveConfigurada": false
+    "modelo": "gemini-3.5-flash-lite",
+    "chaveConfigurada": true
   },
   "demonstracaoHabilitada": true,
-  "geradoEm": "2026-11-19T00:33:08.1586573+00:00"
+  "geradoEm": "2026-11-19T02:48:19.6706049+00:00"
 }

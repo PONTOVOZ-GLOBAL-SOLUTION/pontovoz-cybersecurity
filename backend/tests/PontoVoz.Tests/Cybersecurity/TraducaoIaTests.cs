@@ -216,7 +216,7 @@ public sealed class ClientesLlmTests
 
         Assert.Equal("Mensagem gerada.", texto);
         var (requisicao, corpo) = Assert.Single(manipulador.Recebidas);
-        Assert.Equal("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", requisicao.RequestUri!.ToString());
+        Assert.Equal("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent", requisicao.RequestUri!.ToString());
         Assert.Equal("chave-de-teste", requisicao.Headers.GetValues("x-goog-api-key").Single());
         JsonNode json = JsonNode.Parse(corpo)!;
         Assert.Equal("instruções do sistema", json["systemInstruction"]!["parts"]![0]!["text"]!.GetValue<string>());

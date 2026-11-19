@@ -20,29 +20,33 @@ info: Microsoft.Hosting.Lifetime[0]
 info: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
       Painel de segurança reiniciado para nova demonstração.
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-0DF8C6F4D38F PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5QII1GCJ4:00000002
+      Evento de segurança EVT-7F78007C95D7 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8EV:00000002
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-9ED898918991 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/analises · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000004
+      Evento de segurança EVT-B8AE375E1555 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/analises · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000004
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
       Entrada POST /api/v1/seguranca/analises classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-022C70302628 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000006
+      Evento de segurança EVT-5A2422E98C15 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000006
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
       Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-5EFC1D9143BA PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000006
+      Evento de segurança EVT-7D24E2CD53B8 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000006
 warn: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
       Demonstração: cadastro recebido registrado em log sem tratamento: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-019566EDC0D6 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino servico-externo:parceiro-ficticio · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000006
+      Evento de segurança EVT-1EAA733A8943 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino servico-externo:parceiro-ficticio · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000006
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-0425BAE91C9F PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000006
+      Evento de segurança EVT-01EA022340DF PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000006
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-11230AC6DB38 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000007
+      Evento de segurança EVT-907A36412F97 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000007
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
       Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-645A78455792 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Middleware.TratadorExcecoes · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ4:00000007
+      Evento de segurança EVT-3FD9E3FE61F0 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Middleware.TratadorExcecoes · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8EV:00000007
 fail: PontoVoz.Api.Middleware.TratadorExcecoes[0]
       Erro inesperado em POST /api/v1/seguranca/demonstracao/vazamento-controlado.
       System.InvalidOperationException: Falha simulada ao processar o cadastro {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
@@ -67,41 +71,107 @@ fail: PontoVoz.Api.Middleware.TratadorExcecoes[0]
          at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
          at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-0F1C3787DC7F PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5QII1GCJ4:00000008
+      Evento de segurança EVT-AA64D157EACA PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8EV:00000008
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-9F38AD369C6F PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/admin/observacoes-passagem · destino - · decisão Mascarar · categorias Cpf · correlação 0HNQ5QII1GCJ4:0000000A
+      Evento de segurança EVT-72E93DB6B269 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/admin/observacoes-passagem · destino - · decisão Mascarar · categorias Cpf · correlação 0HNQ5STCNC8EV:0000000A
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
-      Entrada POST /api/v1/admin/observacoes-passagem classificada: 1 ocorrência(s) de PII (Cpf). Corpo protegido: {"paradaId":1,"linhaId":1,"observadaEm":"2026-11-18T21:31:52-03:00","origemRegistro":"***.444.***-35"}
+      Entrada POST /api/v1/admin/observacoes-passagem classificada: 1 ocorrência(s) de PII (Cpf). Corpo protegido: {"paradaId":1,"linhaId":1,"observadaEm":"2026-11-18T23:45:51-03:00","origemRegistro":"***.444.***-35"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-8A8083B88347 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/admin/observacoes-passagem · destino persistencia:PassagemRegistroManual._origemRegistro · decisão Bloquear · categorias Cpf · correlação 0HNQ5QII1GCJ4:0000000A
+      Evento de segurança EVT-CF9EE74132A8 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/admin/observacoes-passagem · destino persistencia:PassagemRegistroManual._origemRegistro · decisão Bloquear · categorias Cpf · correlação 0HNQ5STCNC8EV:0000000A
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 820.6648ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 836.0346ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-CF9EE74132A8 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 2200.4973ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 2211.5977ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-B8AE375E1555 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 983.0381ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 985.8029ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-7D24E2CD53B8 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 2074.0753ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 2076.4931ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-1EAA733A8943 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 2043.6895ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 2045.4615ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-01EA022340DF traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 614.972ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 616.5819ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-72E93DB6B269 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
 info: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
       Painel de segurança reiniciado para nova demonstração.
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-0804654158FA PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5QII1GCJ6:00000005
+      Evento de segurança EVT-8A2ACC03FBE9 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F2:00000005
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-06EAB5A157C9 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5QII1GCJ7:00000001
+      Evento de segurança EVT-AEC4E7B8335C PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F3:00000001
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-2AD383E31F0B PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/analises · destino - · decisão Mascarar · categorias Cpf,Rg,Email,Telefone,Saude,Senha · correlação 0HNQ5QII1GCJ6:00000008
+      Evento de segurança EVT-F3E22490F47E PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/analises · destino - · decisão Mascarar · categorias Cpf,Rg,Email,Telefone,Saude,Senha · correlação 0HNQ5STCNC8F2:00000008
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
       Entrada POST /api/v1/seguranca/analises classificada: 7 ocorrência(s) de PII (Cpf, Rg, Email, Telefone, Saude, Senha). Corpo protegido: {"passageiro":{"nome":"Passageiro Fictício","cpf":"***.456.***-09","rg":"**.***.**8-X","contatos":[{"tipo":"e-mail","valor":"p***@e***.br"},{"tipo":"celular","valor":"(**) *****-5678"}]},"acessibilidade":{"laudo":"[DADO DE SAÚDE PROTEGIDO]"},"senha":"[SENHA REMOVIDA]","observacao":"Meu documento é ***.444.***-35, avisar no ponto SIM-P001"}
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 781.9812ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 783.9892ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-F3E22490F47E traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-14E5EC81973F PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ6:0000000A
+      Evento de segurança EVT-52DFCF12E70B PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F2:0000000A
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
       Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-844634FE312C PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ6:0000000A
+      Evento de segurança EVT-7E313E3105D8 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F2:0000000A
 warn: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
       Demonstração: cadastro recebido registrado em log sem tratamento: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-7A940E92DB59 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino servico-externo:parceiro-ficticio · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ6:0000000A
+      Evento de segurança EVT-9CE57AC8523A PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino servico-externo:parceiro-ficticio · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F2:0000000A
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-197EC5F49955 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ6:0000000A
+      Evento de segurança EVT-D35151BB8EF9 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F2:0000000A
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-FE8D14A90F4A PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ6:0000000E
+      Evento de segurança EVT-11B193F94037 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F2:0000000E
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
       Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-E85999E999C8 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Middleware.TratadorExcecoes · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5QII1GCJ6:0000000E
+      Evento de segurança EVT-2364118A10A3 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Middleware.TratadorExcecoes · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F2:0000000E
 fail: PontoVoz.Api.Middleware.TratadorExcecoes[0]
       Erro inesperado em POST /api/v1/seguranca/demonstracao/vazamento-controlado.
       System.InvalidOperationException: Falha simulada ao processar o cadastro {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
@@ -126,10 +196,155 @@ fail: PontoVoz.Api.Middleware.TratadorExcecoes[0]
          at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
          at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-BF5D7095AA26 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5QII1GCJ6:00000010
+      Evento de segurança EVT-CFE73772620D PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F2:00000010
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-73816F847B12 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/admin/observacoes-passagem · destino - · decisão Mascarar · categorias Cpf · correlação 0HNQ5QII1GCJ6:00000012
+      Evento de segurança EVT-5F839BFC6050 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/admin/observacoes-passagem · destino - · decisão Mascarar · categorias Cpf · correlação 0HNQ5STCNC8F2:00000012
 info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
-      Entrada POST /api/v1/admin/observacoes-passagem classificada: 1 ocorrência(s) de PII (Cpf). Corpo protegido: {"paradaId":1,"linhaId":1,"observadaEm":"2026-11-18T21:32:01-03:00","prefixoVeiculo":null,"origemRegistro":"***.444.***-35"}
+      Entrada POST /api/v1/admin/observacoes-passagem classificada: 1 ocorrência(s) de PII (Cpf). Corpo protegido: {"paradaId":1,"linhaId":1,"observadaEm":"2026-11-18T23:46:21-03:00","prefixoVeiculo":null,"origemRegistro":"***.444.***-35"}
 info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
-      Evento de segurança EVT-BEF28C6E8160 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/admin/observacoes-passagem · destino persistencia:PassagemRegistroManual._origemRegistro · decisão Bloquear · categorias Cpf · correlação 0HNQ5QII1GCJ6:00000012
+      Evento de segurança EVT-DEB38F1A6AE6 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/admin/observacoes-passagem · destino persistencia:PassagemRegistroManual._origemRegistro · decisão Bloquear · categorias Cpf · correlação 0HNQ5STCNC8F2:00000012
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 687.0377ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 695.0893ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-DEB38F1A6AE6 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
+      Painel de segurança reiniciado para nova demonstração.
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-4668DD4CC187 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F5:00000005
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-A292F3901E62 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F6:00000001
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-337CD514F50A PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/analises · destino - · decisão Mascarar · categorias Cpf,Rg,Email,Telefone,Saude,Senha · correlação 0HNQ5STCNC8F5:00000007
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/seguranca/analises classificada: 7 ocorrência(s) de PII (Cpf, Rg, Email, Telefone, Saude, Senha). Corpo protegido: {"passageiro":{"nome":"Passageiro Fictício","cpf":"***.456.***-09","rg":"**.***.**8-X","contatos":[{"tipo":"e-mail","valor":"p***@e***.br"},{"tipo":"celular","valor":"(**) *****-5678"}]},"acessibilidade":{"laudo":"[DADO DE SAÚDE PROTEGIDO]"},"senha":"[SENHA REMOVIDA]","observacao":"Meu documento é ***.444.***-35, avisar no ponto SIM-P001"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-02B5F6F4EDD9 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F5:0000000A
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-E4954B368005 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F5:0000000A
+warn: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
+      Demonstração: cadastro recebido registrado em log sem tratamento: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-E685A0BFF849 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino servico-externo:parceiro-ficticio · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F5:0000000A
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-B078555C76C2 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F5:0000000A
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-B12C23A2BA42 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F5:0000000E
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-7A7984F9C236 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Middleware.TratadorExcecoes · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F5:0000000E
+fail: PontoVoz.Api.Middleware.TratadorExcecoes[0]
+      Erro inesperado em POST /api/v1/seguranca/demonstracao/vazamento-controlado.
+      System.InvalidOperationException: Falha simulada ao processar o cadastro {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
+         at PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController.VazamentoControlado(JsonElement corpo, String modo) in C:\Users\paulo\Projetos\PontoVoz-Cyber\backend\src\PontoVoz.Api\Cybersecurity\Api\DemonstracaoSegurancaController.cs:line 47
+         at lambda_method623(Closure, Object, Object[])
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-29B3FEB774D4 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F5:00000010
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-B4F2EB29A20E PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/admin/observacoes-passagem · destino - · decisão Mascarar · categorias Cpf · correlação 0HNQ5STCNC8F5:00000012
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/admin/observacoes-passagem classificada: 1 ocorrência(s) de PII (Cpf). Corpo protegido: {"paradaId":1,"linhaId":1,"observadaEm":"2026-11-18T23:46:52-03:00","prefixoVeiculo":null,"origemRegistro":"***.444.***-35"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-C2EEA1C635E4 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/admin/observacoes-passagem · destino persistencia:PassagemRegistroManual._origemRegistro · decisão Bloquear · categorias Cpf · correlação 0HNQ5STCNC8F5:00000012
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 790.751ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 795.2839ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-C2EEA1C635E4 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).
+info: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
+      Painel de segurança reiniciado para nova demonstração.
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-293FCEE7FA87 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F8:00000005
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-C247372BD809 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F9:00000001
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-F98C8C8F62E2 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/analises · destino - · decisão Mascarar · categorias Cpf,Rg,Email,Telefone,Saude,Senha · correlação 0HNQ5STCNC8F8:00000007
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/seguranca/analises classificada: 7 ocorrência(s) de PII (Cpf, Rg, Email, Telefone, Saude, Senha). Corpo protegido: {"passageiro":{"nome":"Passageiro Fictício","cpf":"***.456.***-09","rg":"**.***.**8-X","contatos":[{"tipo":"e-mail","valor":"p***@e***.br"},{"tipo":"celular","valor":"(**) *****-5678"}]},"acessibilidade":{"laudo":"[DADO DE SAÚDE PROTEGIDO]"},"senha":"[SENHA REMOVIDA]","observacao":"Meu documento é ***.444.***-35, avisar no ponto SIM-P001"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-4F74AC8F878A PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F8:0000000A
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-0ABA2D14584D PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F8:0000000A
+warn: PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController[0]
+      Demonstração: cadastro recebido registrado em log sem tratamento: {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-5D7FDCC99FFF PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino servico-externo:parceiro-ficticio · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F8:0000000A
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-1122D9BC5B6F PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino resposta:200 POST /api/v1/seguranca/demonstracao/vazamento-controlado · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F8:0000000A
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-B3B6FA4E4B60 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino - · decisão Mascarar · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F8:0000000E
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/seguranca/demonstracao/vazamento-controlado classificada: 4 ocorrência(s) de PII (Cpf, Email, Saude, Senha). Corpo protegido: {"cpf":"***.444.***-35","senha":"[SENHA REMOVIDA]","saude":{"condicao":"[DADO DE SAÚDE PROTEGIDO]"},"email":"p***@e***.br"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-3CE2138D7FA7 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/seguranca/demonstracao/vazamento-controlado · destino log:PontoVoz.Api.Middleware.TratadorExcecoes · decisão Bloquear · categorias Cpf,Email,Saude,Senha · correlação 0HNQ5STCNC8F8:0000000E
+fail: PontoVoz.Api.Middleware.TratadorExcecoes[0]
+      Erro inesperado em POST /api/v1/seguranca/demonstracao/vazamento-controlado.
+      System.InvalidOperationException: Falha simulada ao processar o cadastro {"cpf":"***.444.***-35","senha":"[BLOQUEADO: SENHA]","saude":{"condicao":"[BLOQUEADO: INFORMAÇÃO DE SAÚDE]"},"email":"p***@e***.br"}
+         at PontoVoz.Api.Cybersecurity.Api.DemonstracaoSegurancaController.VazamentoControlado(JsonElement corpo, String modo) in C:\Users\paulo\Projetos\PontoVoz-Cyber\backend\src\PontoVoz.Api\Cybersecurity\Api\DemonstracaoSegurancaController.cs:line 47
+         at lambda_method623(Closure, Object, Object[])
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-8FBA6EEBD070 PII_ANALISE_SEM_DETECCAO · risco Verde · fonte GET /api/v1/paradas · destino - · decisão Permitir · categorias  · correlação 0HNQ5STCNC8F8:00000010
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-BC366DB944D5 PII_DETECTADO_PROTEGIDO · risco Amarelo · fonte POST /api/v1/admin/observacoes-passagem · destino - · decisão Mascarar · categorias Cpf · correlação 0HNQ5STCNC8F8:00000012
+info: PontoVoz.Api.Cybersecurity.Taint.InterceptadorDadosPessoais[0]
+      Entrada POST /api/v1/admin/observacoes-passagem classificada: 1 ocorrência(s) de PII (Cpf). Corpo protegido: {"paradaId":1,"linhaId":1,"observadaEm":"2026-11-18T23:47:12-03:00","prefixoVeiculo":null,"origemRegistro":"***.444.***-35"}
+info: PontoVoz.Api.Cybersecurity.Auditoria.RegistroEventosSeguranca[0]
+      Evento de segurança EVT-65E0FA40A377 PII_TAINT_SINK_BLOCKED · risco Vermelho · fonte POST /api/v1/admin/observacoes-passagem · destino persistencia:PassagemRegistroManual._origemRegistro · decisão Bloquear · categorias Cpf · correlação 0HNQ5STCNC8F8:00000012
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[100]
+      Start processing HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[100]
+      Sending HTTP request POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+info: System.Net.Http.HttpClient.ClienteGemini.ClientHandler[101]
+      Received HTTP response headers after 708.5721ms - 200
+info: System.Net.Http.HttpClient.ClienteGemini.LogicalHandler[101]
+      End processing HTTP request after 714.5919ms - 200
+info: PontoVoz.Api.Cybersecurity.IA.TradutorRiscoCidadao[0]
+      Evento EVT-65E0FA40A377 traduzido pelo provedor Gemini (gemini-3.5-flash-lite).

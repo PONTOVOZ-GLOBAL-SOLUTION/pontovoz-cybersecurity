@@ -269,7 +269,7 @@ async function cenario4() {
   const extra = dados ? `
     <p><strong>Mensagem ao cidadão:</strong> ${escapar(dados.evento.mensagemCidadao)}</p>
     <p>Origem: <strong>${escapar(descreverOrigem(dados.evento))}</strong> · chamada externa realizada: <strong>${dados.chamadaExternaRealizada ? "sim" : "não"}</strong></p>
-    <p>Estrutura sanitizada enviada (ou que seria enviada) ao LLM:</p>
+    <p>${dados.chamadaExternaRealizada ? "Estrutura sanitizada enviada ao LLM:" : "Estrutura sanitizada que seria enviada ao LLM (não houve chamada externa):"}</p>
     <pre>${escapar(JSON.stringify(dados.dadosEnviadosAoLlm, null, 2))}</pre>
     <p>Prompt do usuário:</p>
     <pre>${escapar(dados.promptUsuario)}</pre>` : "";

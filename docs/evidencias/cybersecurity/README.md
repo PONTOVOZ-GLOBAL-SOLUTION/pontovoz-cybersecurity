@@ -1,7 +1,7 @@
 # Evidências — Cybersecurity
 
-Capturas e saídas que geramos em 18/11/2026 com a API em execução local (Development, provedor de
-LLM sem chave configurada), na versão publicada após a auditoria final. Todos os dados enviados
+Capturas e saídas que geramos em 18/11/2026 com a API em execução local (Development), com a
+chave do Gemini configurada (`gemini-3.5-flash-lite`), na versão publicada após a auditoria final. Todos os dados enviados
 são fictícios. O vídeo da demonstração é entregue separadamente
 (`PontoVoz_Cybersecurity_Demonstracao.mp4`).
 
@@ -45,10 +45,11 @@ são fictícios. O vídeo da demonstração é entregue separadamente
 | [codigo/16-tradutor-ia.png](codigo/16-tradutor-ia.png) | Fluxo com guarda da saída externa, validação e fallback |
 | [codigo/17-cliente-gemini.png](codigo/17-cliente-gemini.png) | Requisição ao Gemini |
 | [codigo/18-validador-mensagem.png](codigo/18-validador-mensagem.png) | Validação da resposta do LLM |
-| [telas/12-cenario4-explicacao-ia.png](telas/12-cenario4-explicacao-ia.png) | Explicação exibida, origem `Fallback · ChaveNaoConfigurada` e dados que seriam enviados |
+| [telas/12-cenario4-explicacao-ia.png](telas/12-cenario4-explicacao-ia.png) | Mensagem gerada pelo Gemini, origem e dados sanitizados enviados |
 
-Não houve chamada real a um provedor de LLM, porque não tínhamos uma chave configurada. A tela do
-cenário 4 mostra o fallback identificado, não uma resposta de IA.
+As mensagens ao cidadão desta rodada foram geradas por chamadas reais ao Gemini: a tela do
+cenário 4 mostra a origem `IA (Gemini/gemini-3.5-flash-lite)` e `chamada externa realizada: sim`,
+e o log do console registra as requisições a `generativelanguage.googleapis.com` (sem a chave).
 
 ## Dashboard Risco Cidadão (2,0)
 

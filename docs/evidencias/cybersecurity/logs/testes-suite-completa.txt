@@ -1,8 +1,8 @@
 Executando testes de C:\Users\paulo\Projetos\PontoVoz-Cyber\backend\tests\PontoVoz.Tests\bin\Debug\net10.0\PontoVoz.Tests.dll (net10.0|x64)
-C:\Users\paulo\Projetos\PontoVoz-Cyber\backend\tests\PontoVoz.Tests\bin\Debug\net10.0\PontoVoz.Tests.dll (net10.0|x64) aprovado (20s 142ms)
+C:\Users\paulo\Projetos\PontoVoz-Cyber\backend\tests\PontoVoz.Tests\bin\Debug\net10.0\PontoVoz.Tests.dll (net10.0|x64) aprovado (24s 406ms)
 Resumo da execução de teste: Aprovado!
   total: 1001
   falhou: 0
   concluído com êxito: 1001
   ignorados: 0
-  duração: 20s 544ms
+  duração: 24s 774ms

@@ -183,18 +183,23 @@ vazamento quando houve bloqueio, sem promessas absolutas, sem alarmismo, sem dad
 português); se reprovada, ou se o provedor falhar, vale a mensagem local, e o motivo fica na
 auditoria (`ChaveNaoConfigurada`, `TempoEsgotado`, `ServicoIndisponivel`, `RespostaInadequada:...`).
 
-**Situação da credencial nesta entrega:** não tivemos uma chave de LLM disponível no ambiente de
-desenvolvimento. A integração (Gemini por padrão, OpenAI opcional) está implementada e testada com
-respostas HTTP simuladas, mas **nenhuma chamada real a um provedor foi feita**. As evidências e o
-vídeo mostram o fallback, identificado como tal no painel.
+**Validação real:** em 18/11/2026 configuramos uma chave do Google AI Studio (plano gratuito) e
+validamos a integração com chamadas reais ao Gemini. O modelo configurado é o
+`gemini-3.5-flash-lite`: o `gemini-2.5-flash`, previsto inicialmente, respondeu `404` porque não
+está mais disponível para chaves novas, e os modelos Flash maiores levaram mais de 10 s para
+responder. Nas evidências, os eventos amarelos e vermelhos aparecem com origem
+`IA (Gemini/gemini-3.5-flash-lite)`, e o cenário 4 mostra `chamada externa realizada: sim`.
+A chave nunca entra no repositório; sem ela, o sistema continua funcionando com o fallback
+identificado.
 
-Para ativar a chamada real, basta configurar a chave fora do repositório:
+Para executar com a IA, configure a chave fora do repositório:
 
 ```bash
 dotnet user-secrets set "Cybersecurity:Llm:ChaveApi" "<sua-chave>" --project backend/src/PontoVoz.Api
 ```
 
-ou defina a variável de ambiente `GEMINI_API_KEY`. Para OpenAI, use também
+ou defina a variável de ambiente `GEMINI_API_KEY`. A chave é criada em
+https://aistudio.google.com/apikey. Para OpenAI, use também
 `Cybersecurity:Llm:Provedor=OpenAI`, `Cybersecurity:Llm:Modelo=gpt-4o-mini` e
 `Cybersecurity:Llm:VariavelAmbienteChave=OPENAI_API_KEY`. O painel mostra no topo se a chave está
 configurada.
@@ -220,7 +225,8 @@ Resultado registrado nesta entrega: **1001 testes, 1001 aprovados** — os 816 t
 PontoVoz e 185 do módulo (pasta [`backend/tests/PontoVoz.Tests/Cybersecurity`](backend/tests/PontoVoz.Tests/Cybersecurity)):
 motor PII e validação de CPF, máscaras, política e guarda das saídas, sink de log, auditoria e
 risco, clientes do LLM com HTTP simulado, validação das mensagens, escopos de log, formulário
-multipart, acesso às rotas de demonstração e testes de integração com a API real em memória. Nenhum teste chama um provedor externo. Para rodar só os testes do módulo:
+multipart, acesso às rotas de demonstração e testes de integração com a API real em memória. Nenhum teste chama um provedor externo: o projeto de testes desliga o
+provedor (`SemProvedorLlmNosTestes`) mesmo quando há uma chave configurada na máquina. Para rodar só os testes do módulo:
 
 ```bash
 dotnet test -- --filter-namespace PontoVoz.Tests.Cybersecurity
@@ -251,7 +257,8 @@ as respostas JSON exportadas da API. Com a API rodando, as capturas do painel s�
 - Em `multipart/form-data`, o conteúdo de arquivos anexados não é analisado.
 - A trilha de auditoria fica em memória (últimos 500 eventos) e é perdida ao reiniciar a API;
   a exportação JSON (`GET /api/v1/seguranca/auditoria`) serve para guardar a evidência.
-- A chamada real ao LLM não foi validada nesta entrega (ver "Inteligência artificial").
+- A qualidade do texto gerado depende do provedor; respostas fora das regras são descartadas e
+  substituídas pela mensagem local.
 
 ## Integrantes
 
