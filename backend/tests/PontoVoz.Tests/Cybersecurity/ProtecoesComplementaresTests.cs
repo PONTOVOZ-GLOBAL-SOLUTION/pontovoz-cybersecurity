@@ -63,8 +63,8 @@ internal sealed class LogsComEscopo : ILoggerProvider, ISupportExternalScope
     }
 }
 
-/// <summary>Pontos verificados na auditoria final: escopos de log, formulário multipart e acesso às rotas de demonstração.</summary>
-public sealed class AuditoriaFinalTests
+/// <summary>Escopos de log, formulário multipart, acesso às rotas de demonstração e respostas sem Content-Type.</summary>
+public sealed class ProtecoesComplementaresTests
 {
     private static CancellationToken Ct => ApiTeste.Ct;
 

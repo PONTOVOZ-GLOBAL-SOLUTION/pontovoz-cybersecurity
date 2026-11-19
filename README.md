@@ -194,14 +194,10 @@ vazamento quando houve bloqueio, sem promessas absolutas, sem alarmismo, sem dad
 português); se reprovada, ou se o provedor falhar, vale a mensagem local, e o motivo fica na
 auditoria (`ChaveNaoConfigurada`, `TempoEsgotado`, `ServicoIndisponivel`, `RespostaInadequada:...`).
 
-**Validação real:** em 18/11/2026 configuramos uma chave do Google AI Studio (plano gratuito) e
-validamos a integração com chamadas reais ao Gemini. O modelo configurado é o
-`gemini-3.5-flash-lite`: o `gemini-2.5-flash`, previsto inicialmente, respondeu `404` porque não
-está mais disponível para chaves novas, e os modelos Flash maiores levaram mais de 10 s para
-responder. Nas evidências, os eventos amarelos e vermelhos aparecem com origem
+**Gemini:** usamos o modelo `gemini-3.5-flash-lite`, pelo plano gratuito do Google AI Studio,
+que responde em cerca de 1 s. Nas evidências, os eventos amarelos e vermelhos aparecem com origem
 `IA (Gemini/gemini-3.5-flash-lite)`, e o cenário 4 mostra `chamada externa realizada: sim`.
-A chave nunca entra no repositório; sem ela, o sistema continua funcionando com o fallback
-identificado.
+A chave nunca entra no repositório; sem ela, o sistema funciona com o fallback identificado.
 
 Para executar com a IA, configure a chave fora do repositório:
 
@@ -232,12 +228,12 @@ destino. O nível é calculado pelo backend a partir dos eventos; a IA apenas re
 dotnet test
 ```
 
-Resultado registrado nesta entrega: **1001 testes, 1001 aprovados**: os 816 testes do backend do
+Resultado: **1001 testes, 1001 aprovados**: os 816 testes do backend do
 PontoVoz e 185 do módulo (pasta [`backend/tests/PontoVoz.Tests/Cybersecurity`](backend/tests/PontoVoz.Tests/Cybersecurity)):
 motor PII e validação de CPF, máscaras, política e guarda das saídas, sink de log, auditoria e
 risco, clientes do LLM com HTTP simulado, validação das mensagens, escopos de log, formulário
 multipart, acesso às rotas de demonstração e testes de integração com a API real em memória. Nenhum teste chama um provedor externo: o projeto de testes desliga o
-provedor (`SemProvedorLlmNosTestes`) mesmo quando há uma chave configurada na máquina. Para rodar só os testes do módulo:
+provedor (`SemProvedorLlmNosTestes`), mesmo quando há uma chave configurada. Para rodar só os testes do módulo:
 
 ```bash
 dotnet test -- --filter-namespace PontoVoz.Tests.Cybersecurity

@@ -1,13 +1,4 @@
-Testes do módulo de Cybersecurity (xUnit v3) — total 185, aprovados 185, falhas 0, ignorados 0
-[APROVADO] AuditoriaFinalTests.EscopoDeLogComDadoContaminado_ChegaSanitizadoAoProvedor
-[APROVADO] AuditoriaFinalTests.EscopoSemDadoProtegido_PermaneceEstruturado
-[APROVADO] AuditoriaFinalTests.FormularioMultipart_ArquivoAnexadoNaoEhLidoComoCampo
-[APROVADO] AuditoriaFinalTests.FormularioMultipart_TemOsCamposDeTextoAnalisadosPeloNome
-[APROVADO] AuditoriaFinalTests.RespostaSemContentType_TambemPassaPelaProtecao
-[APROVADO] AuditoriaFinalTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: \"10.0.0.25\", esperado: NotFound)
-[APROVADO] AuditoriaFinalTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: \"127.0.0.1\", esperado: NoContent)
-[APROVADO] AuditoriaFinalTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: \"::1\", esperado: NoContent)
-[APROVADO] AuditoriaFinalTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: null, esperado: NotFound)
+Testes do módulo de Cybersecurity (xUnit v3): total 185, aprovados 185, falhas 0, ignorados 0
 [APROVADO] AuditoriaRiscoTests.AnaliseSemDeteccao_ContinuaVerde_ComMensagemPadrao
 [APROVADO] AuditoriaRiscoTests.Capacidade_DescartaOsEventosMaisAntigos
 [APROVADO] AuditoriaRiscoTests.ClassificarEvento_SegueAPoliticaDocumentada(codigo: \"PII_ANALISE_SEM_DETECCAO\", esperado: Verde)
@@ -122,6 +113,15 @@ Testes do módulo de Cybersecurity (xUnit v3) — total 185, aprovados 185, falh
 [APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"quantidade\\\":12345678,\\\"linhaId\\\":4,\\\"paradaId\\\":1}\")
 [APROVADO] MotorPiiTests.TextosComunsDoPontoVoz_NaoSaoClassificados(json: \"{\\\"tratamentoDeDados\\\":\\\"anonimizado\\\"}\")
 [APROVADO] MotorPiiTests.VariosDadosPessoaisNaMesmaRequisicao_SaoTodosDetectados
+[APROVADO] ProtecoesComplementaresTests.EscopoDeLogComDadoContaminado_ChegaSanitizadoAoProvedor
+[APROVADO] ProtecoesComplementaresTests.EscopoSemDadoProtegido_PermaneceEstruturado
+[APROVADO] ProtecoesComplementaresTests.FormularioMultipart_ArquivoAnexadoNaoEhLidoComoCampo
+[APROVADO] ProtecoesComplementaresTests.FormularioMultipart_TemOsCamposDeTextoAnalisadosPeloNome
+[APROVADO] ProtecoesComplementaresTests.RespostaSemContentType_TambemPassaPelaProtecao
+[APROVADO] ProtecoesComplementaresTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: \"10.0.0.25\", esperado: NotFound)
+[APROVADO] ProtecoesComplementaresTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: \"127.0.0.1\", esperado: NoContent)
+[APROVADO] ProtecoesComplementaresTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: \"::1\", esperado: NoContent)
+[APROVADO] ProtecoesComplementaresTests.RotasDeDemonstracao_SoAtendemChamadasDaPropriaMaquina(enderecoRemoto: null, esperado: NotFound)
 [APROVADO] ProvedorLogProtegidoTests.ExcecaoComPayload_TemOTextoSanitizado
 [APROVADO] ProvedorLogProtegidoTests.MensagemComDadoContaminado_EhEscritaSanitizada
 [APROVADO] ProvedorLogProtegidoTests.MensagemLimpa_SegueSemAlteracao

@@ -1,7 +1,7 @@
 # Evidências · Cybersecurity
 
 Capturas e saídas que geramos em 18/11/2026 com a API em execução local (Development), com a
-chave do Gemini configurada (`gemini-3.5-flash-lite`), na versão publicada após a auditoria final. Todos os dados enviados
+chave do Gemini configurada (`gemini-3.5-flash-lite`). Todos os dados enviados
 são fictícios. O vídeo da demonstração é entregue separadamente
 (`PontoVoz_Cybersecurity_Demonstracao.mp4`).
 
@@ -47,7 +47,7 @@ são fictícios. O vídeo da demonstração é entregue separadamente
 | [codigo/18-validador-mensagem.png](codigo/18-validador-mensagem.png) | Validação da resposta do LLM |
 | [telas/12-cenario4-explicacao-ia.png](telas/12-cenario4-explicacao-ia.png) | Mensagem gerada pelo Gemini, origem e dados sanitizados enviados |
 
-As mensagens ao cidadão desta rodada foram geradas por chamadas reais ao Gemini: a tela do
+As mensagens ao cidadão mostradas nas evidências foram geradas por chamadas reais ao Gemini: a tela do
 cenário 4 mostra a origem `IA (Gemini/gemini-3.5-flash-lite)` e `chamada externa realizada: sim`,
 e o log do console registra as requisições a `generativelanguage.googleapis.com` (sem a chave).
 
